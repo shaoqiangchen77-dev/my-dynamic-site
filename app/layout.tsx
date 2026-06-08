@@ -1,7 +1,7 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'Glassmorphism Blog',
+  title: 'banana博客',
   description: '单页滚动式炫酷毛玻璃透明悬浮个人博客',
 };
 

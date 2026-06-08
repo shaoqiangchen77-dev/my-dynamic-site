@@ -7,6 +7,7 @@ const navItems = [
   { name: '项目', href: '#projects' },
   { name: '关于我', href: '#about' },
   { name: '留言板', href: '#contact' },
+  { name: '日程', href: '/schedule' },
 ];
 
 export default function Nav() {
