@@ -2,80 +2,282 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================
+   全局基础样式
+   ============================================ */
 html {
   scroll-behavior: smooth;
 }
 
-:root {
-  --bg: #f8fafc;
-  --text: #111827;
-  --glass: rgba(255,255,255,0.4);
-  --neon: #ff7d00;
-  --border: rgba(0,0,0,0.1);
-}
-
-.dark {
-  --bg: #09090b;
-  --text: #f1f5f9;
-  --glass: rgba(0,0,0,0.3);
-  --neon: #00d976;
-  --border: rgba(255,255,255,0.1);
-}
-
 body {
-  background: var(--bg);
-  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: rgba(255, 255, 255, 0.9);
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
-.glass {
-  backdrop-filter: blur(16px);
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 0.75rem;
-}
-
-.neon-border {
-  position: relative;
-  z-index: 0;
-  border-radius: 0.75rem;
-}
-.neon-border::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  background: linear-gradient(90deg, var(--neon), var(--neon), var(--neon));
-  background-size: 200% 200%;
-  animation: neon-border 3s linear infinite;
+/* ============================================
+   动态渐变背景层（独立渲染层）
+   ============================================ */
+.bg-gradient-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: -1;
-  border-radius: 0.85rem;
+  background: linear-gradient(135deg, #667eea 0%, #f093fb 50%, #4facfe 100%);
+  background-size: 400% 400%;
+  animation: gradient-flow 20s ease infinite;
 }
 
-.card-glow {
+@keyframes gradient-flow {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 100% 50%; }
+  50% { background-position: 100% 0%; }
+  75% { background-position: 0% 100%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ============================================
+   毛玻璃核心样式
+   ============================================ */
+.glass {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  overflow: visible;
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  border-radius: 16px;
+  overflow: visible;
+}
+
+.glass-subtle {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  overflow: visible;
+}
+
+/* 不支持 backdrop-filter 的降级处理 */
+@supports not (backdrop-filter: blur(4px)) {
+  .glass,
+  .glass-strong,
+  .glass-subtle {
+    background: rgba(255, 255, 255, 0.6);
+  }
+}
+
+/* ============================================
+   毛玻璃输入框
+   ============================================ */
+.glass-input {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.glass-input:focus {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
+}
+
+.glass-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ============================================
+   毛玻璃按钮
+   ============================================ */
+.glass-btn {
+  background: rgba(168, 85, 247, 0.3);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  border-radius: 12px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
-.card-glow:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 0 18px rgba(0, 217, 118, 0.3);
-}
-.dark .card-glow:hover {
-  box-shadow: 0 0 18px rgba(0, 217, 118, 0.3);
-}
-.light .card-glow:hover {
-  box-shadow: 0 0 18px rgba(255, 125, 0, 0.3);
+
+.glass-btn:hover {
+  background: rgba(168, 85, 247, 0.45);
+  transform: scale(1.03);
+  box-shadow: 0 8px 24px rgba(168, 85, 247, 0.2);
 }
 
-.fade-in {
+/* ============================================
+   卡片悬浮交互
+   ============================================ */
+.card-hover {
+  transition: all 0.3s ease-out;
+}
+
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ============================================
+   浮动动画（差异化周期）
+   ============================================ */
+.float-1 { animation: float-gentle 3s ease-in-out infinite; }
+.float-2 { animation: float-gentle 4s ease-in-out infinite; }
+.float-3 { animation: float-gentle 5s ease-in-out infinite; }
+.float-4 { animation: float-gentle 6s ease-in-out infinite; }
+
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* 悬浮时暂停浮动动画并触发上浮 */
+.card-hover:hover {
+  animation-play-state: paused;
+}
+
+/* ============================================
+   滚动入场动画
+   ============================================ */
+.scroll-reveal {
   opacity: 0;
-  animation: scroll-fade 0.8s ease-out forwards;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-@keyframes neon-border {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 200% 50%; }
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-@keyframes scroll-fade {
-  0% { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
+/* ============================================
+   社交图标悬浮动效
+   ============================================ */
+.social-icon {
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: translateY(-4px) rotate(8deg);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ============================================
+   技能标签
+   ============================================ */
+.skill-tag {
+  transition: all 0.3s ease;
+}
+
+.skill-tag:hover {
+  background: rgba(168, 85, 247, 0.3);
+  border-color: rgba(168, 85, 247, 0.5);
+  color: white;
+}
+
+/* ============================================
+   技能进度条
+   ============================================ */
+.skill-bar {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  overflow: hidden;
+  height: 8px;
+}
+
+.skill-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #a855f7, #38bdf8);
+  width: 0;
+  transition: width 1.5s ease-out;
+}
+
+/* ============================================
+   汉堡菜单
+   ============================================ */
+.hamburger-line {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 1px;
+  transition: all 0.3s ease;
+}
+
+/* ============================================
+   滚动条美化
+   ============================================ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================
+   响应式流体字体
+   ============================================ */
+.title-xl {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: white;
+}
+
+.title-lg {
+  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+  font-weight: 700;
+  color: white;
+}
+
+.title-md {
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  font-weight: 600;
+  color: white;
+}
+
+.text-body {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.text-muted {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ============================================
+   导航栏滚动透明度过渡
+   ============================================ */
+.nav-glass {
+  transition: background 0.4s ease, box-shadow 0.4s ease;
 }

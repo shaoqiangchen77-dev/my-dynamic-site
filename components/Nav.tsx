@@ -1,42 +1,80 @@
 'use client';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { useState, useEffect } from 'react';
+
+const navItems = [
+  { name: '首页', href: '#hero' },
+  { name: '文章', href: '#articles' },
+  { name: '项目', href: '#projects' },
+  { name: '关于我', href: '#about' },
+  { name: '留言板', href: '#contact' },
+];
 
 export default function Nav() {
-  const pathname = usePathname();
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const items = [
-    { name: '首页', href: '/' },
-    { name: '关于', href: '/about' },
-    { name: '文章', href: '/posts' },
-    { name: '联系', href: '/contact' },
-  ];
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 100);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const navStyle = scrolled
+    ? 'bg-white/20 shadow-lg'
+    : 'bg-white/10';
 
   return (
-    <nav className="fixed top-0 w-full z-50 glass">
-      <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-        <Link href="/" className="font-bold text-xl text-[var(--neon)]">
-          Banana Blog
-        </Link>
-        <div className="flex gap-5">
-          {items.map((item) => (
-            <Link
+    <nav className={`fixed top-0 left-0 w-full z-50 nav-glass ${navStyle}`}
+      style={{
+        backdropFilter: 'blur(4px)',
+        WebkitBackdropFilter: 'blur(4px)',
+      }}
+    >
+      <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#hero" className="font-bold text-xl text-white tracking-wide">
+          GlassBlog
+        </a>
+
+        {/* Desktop Nav */}
+        <div className="hidden md:flex gap-8">
+          {navItems.map((item) => (
+            <a
               key={item.href}
               href={item.href}
-              className={`relative px-1 ${
-                pathname === item.href
-                  ? 'text-[var(--neon)]'
-                  : 'text-gray-600 dark:text-white/70 hover:text-[var(--neon)]'
-              }`}
+              className="text-white/80 hover:text-white hover:-translate-y-0.5 transition-all duration-300 text-sm font-medium"
             >
               {item.name}
-              {pathname === item.href && (
-                <div className="absolute -bottom-1 w-full h-[2px] bg-[var(--neon)]" />
-              )}
-            </Link>
+            </a>
           ))}
         </div>
+
+        {/* Mobile Hamburger */}
+        <button
+          className="md:hidden flex flex-col gap-1.5 p-2"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+        >
+          <span className={`hamburger-line ${menuOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
+          <span className={`hamburger-line ${menuOpen ? 'opacity-0' : ''}`} />
+          <span className={`hamburger-line ${menuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
+        </button>
       </div>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="md:hidden glass mx-4 mb-4 p-6 flex flex-col gap-4">
+          {navItems.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              onClick={() => setMenuOpen(false)}
+              className="text-white/80 hover:text-white transition-colors text-lg"
+            >
+              {item.name}
+            </a>
+          ))}
+        </div>
+      )}
     </nav>
   );
 }

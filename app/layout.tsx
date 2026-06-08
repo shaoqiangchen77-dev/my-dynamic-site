@@ -1,23 +1,26 @@
 import './globals.css';
-import Nav from '@/components/Nav';
-import ThemeToggle from '@/components/ThemeToggle';
 
 export const metadata = {
-  title: 'Banana Blog',
-  description: '白橙 / 黑绿 双主题玻璃博客',
+  title: 'Glassmorphism Blog',
+  description: '单页滚动式炫酷毛玻璃透明悬浮个人博客',
 };
 
-export default function Layout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="zh-CN" suppressHydrationWarning>
+    <html lang="zh-CN">
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body>
-        <Nav />
-        <div className="pt-20">{children}</div>
-        <ThemeToggle />
+        <div className="bg-gradient-layer" />
+        {children}
       </body>
     </html>
   );
