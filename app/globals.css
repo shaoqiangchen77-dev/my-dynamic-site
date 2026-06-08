@@ -45,7 +45,7 @@
 }
 
 [data-theme="dark"] {
-  --bg-gradient: linear-gradient(135deg, #667eea 0%, #f093fb 50%, #4facfe 100%);
+  --bg-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
   --glass-bg: rgba(255, 255, 255, 0.15);
   --glass-bg-strong: rgba(255, 255, 255, 0.2);
   --glass-bg-subtle: rgba(255, 255, 255, 0.1);
