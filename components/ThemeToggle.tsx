@@ -1,16 +1,18 @@
 'use client';
 import { useEffect, useState } from 'react';
 
+type Theme = 'light' | 'dark' | 'system';
+
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState('system');
+  const [theme, setTheme] = useState<Theme>('system');
 
   useEffect(() => {
-    const saved = localStorage.getItem('theme') || 'system';
+    const saved = (localStorage.getItem('theme') || 'system') as Theme;
     setTheme(saved);
     apply(saved);
   }, []);
 
-  function apply(t) {
+  function apply(t: Theme) {
     if (t === 'dark') {
       document.documentElement.classList.add('dark');
     } else if (t === 'light') {
@@ -24,7 +26,7 @@ export default function ThemeToggle() {
     }
   }
 
-  function set(t) {
+  function set(t: Theme) {
     setTheme(t);
     localStorage.setItem('theme', t);
     apply(t);

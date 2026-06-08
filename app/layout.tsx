@@ -7,7 +7,11 @@ export const metadata = {
   description: '白橙 / 黑绿 双主题玻璃博客',
 };
 
-export default function Layout({ children }) {
+export default function Layout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="zh-CN" suppressHydrationWarning>
       <body>
