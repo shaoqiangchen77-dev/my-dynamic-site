@@ -7,20 +7,20 @@
    ============================================ */
 :root,
 [data-theme="light"] {
-  --glass-bg: rgba(255, 255, 255, 0.12);
-  --glass-bg-strong: rgba(255, 255, 255, 0.18);
-  --glass-bg-subtle: rgba(255, 255, 255, 0.08);
-  --glass-border: rgba(255, 255, 255, 0.3);
-  --glass-border-subtle: rgba(255, 255, 255, 0.2);
-  --glass-shadow: rgba(0, 0, 0, 0.08);
-  --glass-shadow-hover: rgba(0, 0, 0, 0.12);
-  --text-primary: rgba(30, 30, 60, 0.95);
-  --text-body: rgba(30, 30, 60, 0.85);
-  --text-muted: rgba(30, 30, 60, 0.6);
-  --input-bg: rgba(255, 255, 255, 0.2);
-  --input-border: rgba(30, 30, 60, 0.15);
-  --input-focus-border: rgba(168, 85, 247, 0.4);
-  --input-placeholder: rgba(30, 30, 60, 0.4);
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-bg-strong: rgba(255, 255, 255, 0.12);
+  --glass-bg-subtle: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-border-subtle: rgba(255, 255, 255, 0.1);
+  --glass-shadow: rgba(0, 0, 0, 0.2);
+  --glass-shadow-hover: rgba(0, 0, 0, 0.3);
+  --text-primary: rgba(255, 255, 255, 0.95);
+  --text-body: rgba(255, 255, 255, 0.85);
+  --text-muted: rgba(255, 255, 255, 0.6);
+  --input-bg: rgba(255, 255, 255, 0.08);
+  --input-border: rgba(255, 255, 255, 0.15);
+  --input-focus-border: rgba(168, 85, 247, 0.5);
+  --input-placeholder: rgba(255, 255, 255, 0.4);
   --accent: #7c3aed;
   --accent-soft: rgba(124, 58, 237, 0.15);
   --accent-border: rgba(124, 58, 237, 0.3);
@@ -31,16 +31,16 @@
   --purple-tag-bg: rgba(124, 58, 237, 0.12);
   --purple-tag-text: rgba(91, 33, 182, 0.9);
   --purple-tag-border: rgba(124, 58, 237, 0.25);
-  --hamburger-bg: rgba(30, 30, 60, 0.8);
-  --scrollbar-thumb: rgba(30, 30, 60, 0.15);
-  --scrollbar-thumb-hover: rgba(30, 30, 60, 0.25);
-  --social-icon-hover: rgba(255, 255, 255, 0.4);
-  --nav-scrolled-bg: rgba(255, 255, 255, 0.15);
-  --nav-top-bg: rgba(255, 255, 255, 0.06);
-  --skill-tag-text: rgba(30, 30, 60, 0.75);
-  --link-github: rgba(91, 33, 182, 0.9);
-  --link-demo: rgba(30, 64, 175, 0.9);
-  --footer-text: rgba(30, 30, 60, 0.5);
+  --hamburger-bg: rgba(255, 255, 255, 0.85);
+  --scrollbar-thumb: rgba(255, 255, 255, 0.15);
+  --scrollbar-thumb-hover: rgba(255, 255, 255, 0.25);
+  --social-icon-hover: rgba(255, 255, 255, 0.15);
+  --nav-scrolled-bg: rgba(0, 0, 0, 0.3);
+  --nav-top-bg: rgba(0, 0, 0, 0.15);
+  --skill-tag-text: rgba(255, 255, 255, 0.75);
+  --link-github: rgba(192, 132, 252, 1);
+  --link-demo: rgba(125, 211, 252, 1);
+  --footer-text: rgba(255, 255, 255, 0.4);
 }
 
 [data-theme="dark"] {
@@ -110,7 +110,7 @@ body {
 /* 白天：风景图 + 透明玻璃 + 雨滴 */
 [data-theme="light"] .bg-gradient-layer {
   background:
-    url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1920&q=80&auto=format')
+    url('https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=1920&q=80&auto=format')
     center / cover no-repeat;
 }
 
@@ -118,7 +118,7 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.25);
   pointer-events: none;
 }
 
@@ -127,7 +127,7 @@ body {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 40%, rgba(0,0,0,0.05) 100%);
+    linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.02) 40%, rgba(0,0,0,0.15) 100%);
   pointer-events: none;
 }
 
