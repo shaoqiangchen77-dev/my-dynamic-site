@@ -55,7 +55,12 @@ export default function Projects() {
                   {project.tech.map((t) => (
                     <span
                       key={t}
-                      className="text-xs px-3 py-1 rounded-full bg-purple-400/20 text-purple-200 border border-purple-300/30"
+                      className="text-xs px-3 py-1 rounded-full"
+                      style={{
+                        background: 'var(--purple-tag-bg)',
+                        color: 'var(--purple-tag-text)',
+                        border: '1px solid var(--purple-tag-border)',
+                      }}
                     >
                       {t}
                     </span>
@@ -66,13 +71,15 @@ export default function Projects() {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-purple-300 hover:text-white transition-colors"
+                    className="text-sm transition-colors"
+                    style={{ color: 'var(--link-github)' }}
                   >
                     GitHub →
                   </a>
                   <a
                     href={project.demo}
-                    className="text-sm text-blue-300 hover:text-white transition-colors"
+                    className="text-sm transition-colors"
+                    style={{ color: 'var(--link-demo)' }}
                   >
                     演示 →
                   </a>

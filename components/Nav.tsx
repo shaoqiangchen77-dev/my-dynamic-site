@@ -19,19 +19,22 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const navStyle = scrolled
-    ? 'bg-white/20 shadow-lg'
-    : 'bg-white/10';
-
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 nav-glass ${navStyle}`}
+    <nav
+      className="fixed top-0 left-0 w-full z-50 nav-glass"
       style={{
+        background: scrolled ? 'var(--nav-scrolled-bg)' : 'var(--nav-top-bg)',
+        boxShadow: scrolled ? '0 4px 24px var(--glass-shadow)' : 'none',
         backdropFilter: 'blur(4px)',
         WebkitBackdropFilter: 'blur(4px)',
       }}
     >
       <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="#hero" className="font-bold text-xl text-white tracking-wide">
+        <a
+          href="#hero"
+          className="font-bold text-xl tracking-wide"
+          style={{ color: 'var(--text-primary)' }}
+        >
           GlassBlog
         </a>
 
@@ -41,7 +44,10 @@ export default function Nav() {
             <a
               key={item.href}
               href={item.href}
-              className="text-white/80 hover:text-white hover:-translate-y-0.5 transition-all duration-300 text-sm font-medium"
+              className="hover:-translate-y-0.5 transition-all duration-300 text-sm font-medium"
+              style={{ color: 'var(--text-muted)' }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
             >
               {item.name}
             </a>
@@ -68,7 +74,10 @@ export default function Nav() {
               key={item.href}
               href={item.href}
               onClick={() => setMenuOpen(false)}
-              className="text-white/80 hover:text-white transition-colors text-lg"
+              className="transition-colors text-lg"
+              style={{ color: 'var(--text-muted)' }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
             >
               {item.name}
             </a>

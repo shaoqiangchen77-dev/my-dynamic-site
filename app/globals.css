@@ -3,6 +3,86 @@
 @tailwind utilities;
 
 /* ============================================
+   主题变量定义
+   ============================================ */
+:root,
+[data-theme="light"] {
+  --bg-gradient: linear-gradient(135deg, #a8c0ff 0%, #f3d1f4 50%, #b8e6ff 100%);
+  --glass-bg: rgba(255, 255, 255, 0.25);
+  --glass-bg-strong: rgba(255, 255, 255, 0.35);
+  --glass-bg-subtle: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.45);
+  --glass-border-subtle: rgba(255, 255, 255, 0.3);
+  --glass-shadow: rgba(0, 0, 0, 0.08);
+  --glass-shadow-hover: rgba(0, 0, 0, 0.12);
+  --text-primary: rgba(30, 30, 60, 0.95);
+  --text-body: rgba(30, 30, 60, 0.85);
+  --text-muted: rgba(30, 30, 60, 0.6);
+  --input-bg: rgba(255, 255, 255, 0.2);
+  --input-border: rgba(30, 30, 60, 0.15);
+  --input-focus-border: rgba(168, 85, 247, 0.4);
+  --input-placeholder: rgba(30, 30, 60, 0.4);
+  --accent: #7c3aed;
+  --accent-soft: rgba(124, 58, 237, 0.15);
+  --accent-border: rgba(124, 58, 237, 0.3);
+  --accent-hover: rgba(124, 58, 237, 0.25);
+  --blue-tag-bg: rgba(59, 130, 246, 0.15);
+  --blue-tag-text: rgba(30, 64, 175, 0.9);
+  --blue-tag-border: rgba(59, 130, 246, 0.3);
+  --purple-tag-bg: rgba(124, 58, 237, 0.12);
+  --purple-tag-text: rgba(91, 33, 182, 0.9);
+  --purple-tag-border: rgba(124, 58, 237, 0.25);
+  --hamburger-bg: rgba(30, 30, 60, 0.8);
+  --scrollbar-thumb: rgba(30, 30, 60, 0.15);
+  --scrollbar-thumb-hover: rgba(30, 30, 60, 0.25);
+  --social-icon-hover: rgba(255, 255, 255, 0.4);
+  --nav-scrolled-bg: rgba(255, 255, 255, 0.3);
+  --nav-top-bg: rgba(255, 255, 255, 0.15);
+  --skill-tag-text: rgba(30, 30, 60, 0.75);
+  --link-github: rgba(91, 33, 182, 0.9);
+  --link-demo: rgba(30, 64, 175, 0.9);
+  --footer-text: rgba(30, 30, 60, 0.5);
+}
+
+[data-theme="dark"] {
+  --bg-gradient: linear-gradient(135deg, #667eea 0%, #f093fb 50%, #4facfe 100%);
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-bg-strong: rgba(255, 255, 255, 0.2);
+  --glass-bg-subtle: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-border-subtle: rgba(255, 255, 255, 0.2);
+  --glass-shadow: rgba(0, 0, 0, 0.1);
+  --glass-shadow-hover: rgba(0, 0, 0, 0.15);
+  --text-primary: rgba(255, 255, 255, 1);
+  --text-body: rgba(255, 255, 255, 0.9);
+  --text-muted: rgba(255, 255, 255, 0.7);
+  --input-bg: rgba(255, 255, 255, 0.1);
+  --input-border: rgba(255, 255, 255, 0.2);
+  --input-focus-border: rgba(255, 255, 255, 0.5);
+  --input-placeholder: rgba(255, 255, 255, 0.5);
+  --accent: #a855f7;
+  --accent-soft: rgba(168, 85, 247, 0.3);
+  --accent-border: rgba(168, 85, 247, 0.4);
+  --accent-hover: rgba(168, 85, 247, 0.45);
+  --blue-tag-bg: rgba(56, 189, 248, 0.2);
+  --blue-tag-text: rgba(186, 230, 253, 1);
+  --blue-tag-border: rgba(125, 211, 252, 0.3);
+  --purple-tag-bg: rgba(168, 85, 247, 0.2);
+  --purple-tag-text: rgba(233, 213, 255, 1);
+  --purple-tag-border: rgba(196, 181, 253, 0.3);
+  --hamburger-bg: rgba(255, 255, 255, 0.9);
+  --scrollbar-thumb: rgba(255, 255, 255, 0.2);
+  --scrollbar-thumb-hover: rgba(255, 255, 255, 0.3);
+  --social-icon-hover: rgba(255, 255, 255, 0.25);
+  --nav-scrolled-bg: rgba(255, 255, 255, 0.2);
+  --nav-top-bg: rgba(255, 255, 255, 0.1);
+  --skill-tag-text: rgba(255, 255, 255, 0.8);
+  --link-github: rgba(192, 132, 252, 1);
+  --link-demo: rgba(125, 211, 252, 1);
+  --footer-text: rgba(255, 255, 255, 0.5);
+}
+
+/* ============================================
    全局基础样式
    ============================================ */
 html {
@@ -11,9 +91,10 @@ html {
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-body);
   min-height: 100vh;
   overflow-x: hidden;
+  transition: color 0.3s ease;
 }
 
 /* ============================================
@@ -26,9 +107,10 @@ body {
   width: 100%;
   height: 100%;
   z-index: -1;
-  background: linear-gradient(135deg, #667eea 0%, #f093fb 50%, #4facfe 100%);
+  background: var(--bg-gradient);
   background-size: 400% 400%;
   animation: gradient-flow 20s ease infinite;
+  transition: background 0.5s ease;
 }
 
 @keyframes gradient-flow {
@@ -43,31 +125,31 @@ body {
    毛玻璃核心样式
    ============================================ */
 .glass {
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--glass-bg);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px var(--glass-shadow);
   border-radius: 16px;
   overflow: visible;
 }
 
 .glass-strong {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--glass-bg-strong);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px var(--glass-shadow-hover);
   border-radius: 16px;
   overflow: visible;
 }
 
 .glass-subtle {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--glass-bg-subtle);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--glass-border-subtle);
+  box-shadow: 0 4px 16px var(--glass-shadow);
   border-radius: 16px;
   overflow: visible;
 }
@@ -77,7 +159,7 @@ body {
   .glass,
   .glass-strong,
   .glass-subtle {
-    background: rgba(255, 255, 255, 0.6);
+    background: var(--glass-bg-strong);
   }
 }
 
@@ -85,45 +167,45 @@ body {
    毛玻璃输入框
    ============================================ */
 .glass-input {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--input-bg);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--input-border);
   border-radius: 12px;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-body);
   transition: all 0.3s ease;
   outline: none;
 }
 
 .glass-input:focus {
-  border-color: rgba(255, 255, 255, 0.5);
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
+  border-color: var(--input-focus-border);
+  background: var(--glass-bg);
+  box-shadow: 0 0 20px var(--accent-soft);
 }
 
 .glass-input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--input-placeholder);
 }
 
 /* ============================================
    毛玻璃按钮
    ============================================ */
 .glass-btn {
-  background: rgba(168, 85, 247, 0.3);
+  background: var(--accent-soft);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  border: 1px solid rgba(168, 85, 247, 0.4);
+  border: 1px solid var(--accent-border);
   border-radius: 12px;
-  color: white;
+  color: var(--text-primary);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .glass-btn:hover {
-  background: rgba(168, 85, 247, 0.45);
+  background: var(--accent-hover);
   transform: scale(1.03);
-  box-shadow: 0 8px 24px rgba(168, 85, 247, 0.2);
+  box-shadow: 0 8px 24px var(--accent-soft);
 }
 
 /* ============================================
@@ -135,8 +217,8 @@ body {
 
 .card-hover:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 40px var(--glass-shadow-hover);
+  background: var(--glass-bg-strong);
 }
 
 /* ============================================
@@ -180,7 +262,7 @@ body {
 
 .social-icon:hover {
   transform: translateY(-4px) rotate(8deg);
-  background: rgba(255, 255, 255, 0.25);
+  background: var(--social-icon-hover);
 }
 
 /* ============================================
@@ -188,19 +270,20 @@ body {
    ============================================ */
 .skill-tag {
   transition: all 0.3s ease;
+  color: var(--skill-tag-text);
 }
 
 .skill-tag:hover {
-  background: rgba(168, 85, 247, 0.3);
-  border-color: rgba(168, 85, 247, 0.5);
-  color: white;
+  background: var(--accent-soft);
+  border-color: var(--accent-border);
+  color: var(--text-primary);
 }
 
 /* ============================================
    技能进度条
    ============================================ */
 .skill-bar {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--glass-bg-subtle);
   border-radius: 999px;
   overflow: hidden;
   height: 8px;
@@ -209,7 +292,7 @@ body {
 .skill-bar-fill {
   height: 100%;
   border-radius: 999px;
-  background: linear-gradient(90deg, #a855f7, #38bdf8);
+  background: linear-gradient(90deg, var(--accent), #38bdf8);
   width: 0;
   transition: width 1.5s ease-out;
 }
@@ -221,7 +304,7 @@ body {
   display: block;
   width: 24px;
   height: 2px;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--hamburger-bg);
   border-radius: 1px;
   transition: all 0.3s ease;
 }
@@ -238,12 +321,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--scrollbar-thumb);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--scrollbar-thumb-hover);
 }
 
 /* ============================================
@@ -252,27 +335,27 @@ body {
 .title-xl {
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 700;
-  color: white;
+  color: var(--text-primary);
 }
 
 .title-lg {
   font-size: clamp(1.5rem, 3.5vw, 2.25rem);
   font-weight: 700;
-  color: white;
+  color: var(--text-primary);
 }
 
 .title-md {
   font-size: clamp(1.125rem, 2.5vw, 1.5rem);
   font-weight: 600;
-  color: white;
+  color: var(--text-primary);
 }
 
 .text-body {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-body);
 }
 
 .text-muted {
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-muted);
 }
 
 /* ============================================

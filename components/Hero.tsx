@@ -40,10 +40,13 @@ export default function Hero() {
                 rel="noopener noreferrer"
                 className="glass-subtle social-icon p-4 flex flex-col items-center gap-2 rounded-xl"
               >
-                <span className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-lg font-bold text-white">
+                <span
+                  className="w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold"
+                  style={{ background: 'var(--glass-bg-subtle)', color: 'var(--text-primary)' }}
+                >
                   {link.icon}
                 </span>
-                <span className="text-sm text-white/80">{link.name}</span>
+                <span className="text-sm" style={{ color: 'var(--text-muted)' }}>{link.name}</span>
               </a>
             ))}
           </div>

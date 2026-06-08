@@ -18,7 +18,7 @@ export default function Contact() {
         <div className="glass card-hover float-1 p-8 scroll-reveal">
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-sm text-white/80 mb-2">姓名</label>
+              <label className="block text-sm mb-2" style={{ color: 'var(--text-muted)' }}>姓名</label>
               <input
                 type="text"
                 placeholder="请输入你的姓名"
@@ -26,7 +26,7 @@ export default function Contact() {
               />
             </div>
             <div>
-              <label className="block text-sm text-white/80 mb-2">邮箱</label>
+              <label className="block text-sm mb-2" style={{ color: 'var(--text-muted)' }}>邮箱</label>
               <input
                 type="email"
                 placeholder="请输入你的邮箱"
@@ -34,7 +34,7 @@ export default function Contact() {
               />
             </div>
             <div>
-              <label className="block text-sm text-white/80 mb-2">留言内容</label>
+              <label className="block text-sm mb-2" style={{ color: 'var(--text-muted)' }}>留言内容</label>
               <textarea
                 placeholder="写下你想说的话..."
                 rows={5}

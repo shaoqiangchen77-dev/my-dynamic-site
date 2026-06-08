@@ -49,7 +49,12 @@ export default function Articles() {
                   {article.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-xs px-3 py-1 rounded-full bg-blue-400/20 text-blue-200 border border-blue-300/30"
+                      className="text-xs px-3 py-1 rounded-full"
+                      style={{
+                        background: 'var(--blue-tag-bg)',
+                        color: 'var(--blue-tag-text)',
+                        border: '1px solid var(--blue-tag-border)',
+                      }}
                     >
                       {tag}
                     </span>

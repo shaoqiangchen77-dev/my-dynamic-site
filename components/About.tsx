@@ -51,7 +51,11 @@ export default function About() {
                 {tags.map((tag) => (
                   <span
                     key={tag}
-                    className="skill-tag text-xs px-3 py-1.5 rounded-full bg-white/10 text-white/80 border border-white/20 cursor-default"
+                    className="skill-tag text-xs px-3 py-1.5 rounded-full cursor-default"
+                    style={{
+                      background: 'var(--glass-bg-subtle)',
+                      border: '1px solid var(--glass-border-subtle)',
+                    }}
                   >
                     {tag}
                   </span>
@@ -73,8 +77,8 @@ export default function About() {
                 {skills.map((skill) => (
                   <div key={skill.name}>
                     <div className="flex justify-between mb-1">
-                      <span className="text-sm text-white/80">{skill.name}</span>
-                      <span className="text-xs text-white/60">{skill.level}%</span>
+                      <span className="text-sm" style={{ color: 'var(--text-body)' }}>{skill.name}</span>
+                      <span className="text-xs" style={{ color: 'var(--text-muted)' }}>{skill.level}%</span>
                     </div>
                     <div className="skill-bar">
                       <div

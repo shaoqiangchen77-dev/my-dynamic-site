@@ -5,6 +5,7 @@ import Projects from '@/components/Projects';
 import About from '@/components/About';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import ThemeToggle from '@/components/ThemeToggle';
 import ScrollReveal from '@/components/ScrollReveal';
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+      <ThemeToggle />
       <ScrollReveal />
     </>
   );
