@@ -7,11 +7,11 @@
    ============================================ */
 :root,
 [data-theme="light"] {
-  --glass-bg: rgba(255, 255, 255, 0.25);
-  --glass-bg-strong: rgba(255, 255, 255, 0.35);
-  --glass-bg-subtle: rgba(255, 255, 255, 0.15);
-  --glass-border: rgba(255, 255, 255, 0.45);
-  --glass-border-subtle: rgba(255, 255, 255, 0.3);
+  --glass-bg: rgba(255, 255, 255, 0.12);
+  --glass-bg-strong: rgba(255, 255, 255, 0.18);
+  --glass-bg-subtle: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-border-subtle: rgba(255, 255, 255, 0.2);
   --glass-shadow: rgba(0, 0, 0, 0.08);
   --glass-shadow-hover: rgba(0, 0, 0, 0.12);
   --text-primary: rgba(30, 30, 60, 0.95);
@@ -35,8 +35,8 @@
   --scrollbar-thumb: rgba(30, 30, 60, 0.15);
   --scrollbar-thumb-hover: rgba(30, 30, 60, 0.25);
   --social-icon-hover: rgba(255, 255, 255, 0.4);
-  --nav-scrolled-bg: rgba(255, 255, 255, 0.3);
-  --nav-top-bg: rgba(255, 255, 255, 0.15);
+  --nav-scrolled-bg: rgba(255, 255, 255, 0.15);
+  --nav-top-bg: rgba(255, 255, 255, 0.06);
   --skill-tag-text: rgba(30, 30, 60, 0.75);
   --link-github: rgba(91, 33, 182, 0.9);
   --link-demo: rgba(30, 64, 175, 0.9);
@@ -107,9 +107,19 @@ body {
   z-index: -1;
 }
 
-/* 白天：透明玻璃 + 光泽 */
+/* 白天：风景图 + 透明玻璃 + 雨滴 */
 [data-theme="light"] .bg-gradient-layer {
-  background: linear-gradient(160deg, #e8f0fe 0%, #f0e6ff 40%, #e0f2ff 70%, #f5f0ff 100%);
+  background:
+    url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1920&q=80&auto=format')
+    center / cover no-repeat;
+}
+
+[data-theme="light"] .bg-gradient-layer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.15);
+  pointer-events: none;
 }
 
 [data-theme="light"] .bg-gradient-layer::after {
@@ -117,8 +127,7 @@ body {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 120% 80% at 30% 20%, rgba(255,255,255,0.5) 0%, transparent 60%),
-    radial-gradient(ellipse 80% 60% at 70% 80%, rgba(200,220,255,0.3) 0%, transparent 50%);
+    linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 40%, rgba(0,0,0,0.05) 100%);
   pointer-events: none;
 }
 
