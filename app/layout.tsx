@@ -1,8 +1,12 @@
 import './globals.css';
+import RainEffect from '@/components/RainEffect';
 
 export const metadata = {
   title: 'banana博客',
   description: '单页滚动式炫酷毛玻璃透明悬浮个人博客',
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 // 防止主题闪烁的内联脚本
@@ -34,6 +38,7 @@ export default function RootLayout({
       </head>
       <body>
         <div className="bg-gradient-layer" />
+        <RainEffect />
         {children}
       </body>
     </html>
