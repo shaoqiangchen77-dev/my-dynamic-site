@@ -19,7 +19,7 @@ export default function Hero() {
               G
             </div>
           </div>
-          <h1 className="title-xl mb-3">你好，我是 陈劭强</h1>
+          <h1 className="title-xl mb-3">你好，我是 尘愆</h1>
           <p className="text-body text-lg leading-relaxed">
             全栈开发者 / 开源爱好者 / 终身学习者
           </p>
