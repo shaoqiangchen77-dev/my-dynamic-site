@@ -6,7 +6,7 @@ export default function Home() {
     <main className="min-h-screen p-6 flex flex-col items-center justify-center gap-8">
       {/* 大字 */}
       <h1 className="text-5xl md:text-7xl font-bold text-red-600 text-center">
-        李金茜是个大笨蛋
+        懒羊羊是个聪明蛋
       </h1>
 
       <div className="glass p-8 max-w-2xl w-full rounded-2xl fade-in text-center">
