@@ -15,12 +15,12 @@ export default function ScrollProgress() {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-1 z-[60]">
+    <div className="fixed top-0 left-0 w-full z-[60]" style={{ height: '2px' }}>
       <div
         className="h-full transition-[width] duration-100"
         style={{
           width: `${progress}%`,
-          background: 'linear-gradient(90deg, #a855f7, #38bdf8, #d4a843)',
+          background: 'rgba(212,168,67,0.6)',
         }}
       />
     </div>

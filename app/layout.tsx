@@ -1,5 +1,6 @@
 import './globals.css';
 import RainEffect from '@/components/RainEffect';
+import TwinkleStars from '@/components/TwinkleStars';
 
 export const metadata = {
   title: 'banana博客',
@@ -38,7 +39,9 @@ export default function RootLayout({
       </head>
       <body>
         <div className="bg-gradient-layer" />
+        <div className="galaxy-glow" />
         <RainEffect />
+        <TwinkleStars />
         {children}
       </body>
     </html>
