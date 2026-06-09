@@ -1,4 +1,5 @@
 'use client';
+import { useState, useEffect } from 'react';
 
 const socialLinks = [
   { name: 'GitHub', icon: 'GH', href: 'https://github.com' },
@@ -7,13 +8,41 @@ const socialLinks = [
   { name: 'Blog', icon: 'BG', href: '#articles' },
 ];
 
+const fullText = '专注于 Java 生态与 Vue/UniApp 全端开发，深度使用 AI 编程工具提效';
+
+function useTypewriter(text: string, speed = 50, delay = 800) {
+  const [displayed, setDisplayed] = useState('');
+  const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    let i = 0;
+    let timeout: ReturnType<typeof setTimeout>;
+    const start = setTimeout(() => {
+      const type = () => {
+        if (i < text.length) {
+          setDisplayed(text.slice(0, i + 1));
+          i++;
+          timeout = setTimeout(type, speed);
+        } else {
+          setDone(true);
+        }
+      };
+      type();
+    }, delay);
+    return () => { clearTimeout(start); clearTimeout(timeout); };
+  }, [text, speed, delay]);
+
+  return { displayed, done };
+}
+
 export default function Hero() {
+  const { displayed, done } = useTypewriter(fullText, 40, 600);
+
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center px-6 pt-20">
       <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-8 items-center">
         {/* 个人信息 */}
         <div className="glass card-hover float-2 p-8 flex flex-col items-center text-center md:items-start md:text-left">
-          {/* 头像 */}
           <div className="w-28 h-28 rounded-full glass-subtle flex items-center justify-center mb-6 overflow-hidden">
             <div className="w-24 h-24 rounded-full flex items-center justify-center text-4xl font-bold" style={{ background: '#0a0a0a', color: '#d4a843' }}>
               尘
@@ -23,8 +52,9 @@ export default function Hero() {
           <p className="text-body text-lg leading-relaxed">
             Java 后端 / 前端开发 / AI Agent 探索者
           </p>
-          <p className="text-muted mt-2">
-            专注于 Java 生态与 Vue/UniApp 全端开发，深度使用 AI 编程工具提效
+          <p className="text-muted mt-2 min-h-[1.75rem]">
+            {displayed}
+            <span className="inline-block w-0.5 h-4 ml-0.5 align-middle" style={{ background: 'var(--text-muted)', opacity: done ? 0 : 1, animation: 'blink 0.8s step-end infinite' }} />
           </p>
           <div className="flex flex-wrap gap-2 mt-3 justify-center md:justify-start">
             {['Claude Code', 'Cursor', '扣子', 'Codex', 'Trae'].map((tool) => (

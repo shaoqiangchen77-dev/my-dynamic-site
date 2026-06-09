@@ -438,3 +438,38 @@ body {
 .nav-glass {
   transition: background 0.4s ease, box-shadow 0.4s ease;
 }
+
+/* ============================================
+   加载动画
+   ============================================ */
+@keyframes loading-fade {
+  0% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; pointer-events: none; }
+}
+
+@keyframes loading-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+@keyframes loading-dot {
+  0%, 100% { opacity: 0.3; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-4px); }
+}
+
+/* ============================================
+   打字机光标闪烁
+   ============================================ */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ============================================
+   淡入上浮
+   ============================================ */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}

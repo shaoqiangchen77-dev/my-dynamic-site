@@ -6,6 +6,7 @@ const navItems = [
   { name: '文章', href: '#articles' },
   { name: '项目', href: '#projects' },
   { name: '关于我', href: '#about' },
+  { name: '经历', href: '#timeline' },
   { name: '留言板', href: '#contact' },
   { name: '日程', href: '/schedule' },
 ];

@@ -1,4 +1,5 @@
 'use client';
+import { useState } from 'react';
 
 const articles = [
   {
@@ -50,32 +51,75 @@ const articles = [
     tags: ['扣子', 'Codex', '自动化'],
     cover: 'from-rose-500 to-pink-500',
   },
+  {
+    title: 'Vue 3 组合式 API 深度实践与 Pinia 状态管理',
+    summary: '从 Options API 到 Composition API 的思维转变，结合 Pinia 实现优雅的状态管理与逻辑复用。',
+    date: '2026-02-25',
+    tags: ['Vue', 'Pinia', '前端'],
+    cover: 'from-emerald-500 to-teal-500',
+  },
 ];
 
 export default function Articles() {
+  const [activeTag, setActiveTag] = useState<string | null>(null);
+
+  const allTags = Array.from(new Set(articles.flatMap((a) => a.tags)));
+  const filtered = activeTag ? articles.filter((a) => a.tags.includes(activeTag)) : articles;
+
   return (
     <section id="articles" className="py-20 px-6">
       <div className="max-w-6xl mx-auto">
-        <h2 className="title-xl text-center mb-12 scroll-reveal">最新文章</h2>
+        <h2 className="title-xl text-center mb-8 scroll-reveal">最新文章</h2>
+
+        {/* 标签筛选 */}
+        <div className="flex flex-wrap gap-2 justify-center mb-8 scroll-reveal">
+          <button
+            onClick={() => setActiveTag(null)}
+            className="text-xs px-3 py-1.5 rounded-full transition-all"
+            style={{
+              background: activeTag === null ? 'var(--accent-soft)' : 'var(--glass-bg-subtle)',
+              border: `1px solid ${activeTag === null ? 'var(--accent-border)' : 'var(--glass-border-subtle)'}`,
+              color: activeTag === null ? 'var(--text-primary)' : 'var(--text-muted)',
+            }}
+          >
+            全部
+          </button>
+          {allTags.map((tag) => (
+            <button
+              key={tag}
+              onClick={() => setActiveTag(activeTag === tag ? null : tag)}
+              className="text-xs px-3 py-1.5 rounded-full transition-all"
+              style={{
+                background: activeTag === tag ? 'var(--accent-soft)' : 'var(--glass-bg-subtle)',
+                border: `1px solid ${activeTag === tag ? 'var(--accent-border)' : 'var(--glass-border-subtle)'}`,
+                color: activeTag === tag ? 'var(--text-primary)' : 'var(--text-muted)',
+              }}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
+
+        {/* 文章列表 */}
         <div className="grid md:grid-cols-2 gap-6">
-          {articles.map((article, i) => (
+          {filtered.map((article, i) => (
             <article
               key={article.title}
               className={`glass card-hover float-${(i % 4) + 1} scroll-reveal overflow-hidden`}
             >
-              {/* 封面 */}
               <div className={`h-40 bg-gradient-to-br ${article.cover} rounded-t-2xl`} />
               <div className="p-6">
                 <div className="flex gap-2 mb-3 flex-wrap">
                   {article.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-xs px-3 py-1 rounded-full"
+                      className="text-xs px-3 py-1 rounded-full cursor-pointer"
                       style={{
-                        background: 'var(--blue-tag-bg)',
-                        color: 'var(--blue-tag-text)',
-                        border: '1px solid var(--blue-tag-border)',
+                        background: activeTag === tag ? 'var(--accent-soft)' : 'var(--blue-tag-bg)',
+                        color: activeTag === tag ? 'var(--text-primary)' : 'var(--blue-tag-text)',
+                        border: `1px solid ${activeTag === tag ? 'var(--accent-border)' : 'var(--blue-tag-border)'}`,
                       }}
+                      onClick={() => setActiveTag(activeTag === tag ? null : tag)}
                     >
                       {tag}
                     </span>
