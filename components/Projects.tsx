@@ -8,6 +8,7 @@ const projects = [
     cover: 'from-orange-500 to-red-500',
     github: 'https://github.com',
     demo: '#',
+    stars: 326,
   },
   {
     name: 'AgentForge',
@@ -16,6 +17,7 @@ const projects = [
     cover: 'from-purple-500 to-pink-500',
     github: 'https://github.com',
     demo: '#',
+    stars: 518,
   },
   {
     name: 'NovaUI',
@@ -24,6 +26,7 @@ const projects = [
     cover: 'from-green-500 to-emerald-500',
     github: 'https://github.com',
     demo: '#',
+    stars: 204,
   },
   {
     name: 'DevPilot',
@@ -32,6 +35,7 @@ const projects = [
     cover: 'from-sky-500 to-indigo-500',
     github: 'https://github.com',
     demo: '#',
+    stars: 142,
   },
 ];
 
@@ -66,23 +70,28 @@ export default function Projects() {
                     </span>
                   ))}
                 </div>
-                <div className="flex gap-4">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm transition-colors"
-                    style={{ color: 'var(--link-github)' }}
-                  >
-                    GitHub →
-                  </a>
-                  <a
-                    href={project.demo}
-                    className="text-sm transition-colors"
-                    style={{ color: 'var(--link-demo)' }}
-                  >
-                    演示 →
-                  </a>
+                <div className="flex items-center justify-between">
+                  <div className="flex gap-4">
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm transition-colors"
+                      style={{ color: 'var(--link-github)' }}
+                    >
+                      GitHub →
+                    </a>
+                    <a
+                      href={project.demo}
+                      className="text-sm transition-colors"
+                      style={{ color: 'var(--link-demo)' }}
+                    >
+                      演示 →
+                    </a>
+                  </div>
+                  <span className="text-xs flex items-center gap-1" style={{ color: 'var(--text-muted)' }}>
+                    ★ {project.stars}
+                  </span>
                 </div>
               </div>
             </div>

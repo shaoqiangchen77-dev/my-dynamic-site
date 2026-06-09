@@ -3,10 +3,14 @@ import { useState, useEffect } from 'react';
 
 export default function LoadingScreen() {
   const [show, setShow] = useState(true);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress((p) => Math.min(p + Math.random() * 30 + 10, 100));
+    }, 200);
     const timer = setTimeout(() => setShow(false), 1200);
-    return () => clearTimeout(timer);
+    return () => { clearTimeout(timer); clearInterval(interval); };
   }, []);
 
   if (!show) return null;
@@ -43,6 +47,13 @@ export default function LoadingScreen() {
               }}
             />
           ))}
+        </div>
+        {/* 进度条 */}
+        <div className="w-32 h-0.5 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.1)' }}>
+          <div
+            className="h-full rounded-full transition-all duration-200 ease-out"
+            style={{ width: `${progress}%`, background: '#d4a843' }}
+          />
         </div>
       </div>
     </div>

@@ -81,10 +81,10 @@ export default function About() {
               <h3 className="title-md mb-4">技能</h3>
               <div ref={barsRef} className="space-y-4">
                 {skills.map((skill) => (
-                  <div key={skill.name}>
+                  <div key={skill.name} className="group">
                     <div className="flex justify-between mb-1">
-                      <span className="text-sm" style={{ color: 'var(--text-body)' }}>{skill.name}</span>
-                      <span className="text-xs" style={{ color: 'var(--text-muted)' }}>{skill.level}%</span>
+                      <span className="text-sm group-hover:text-white transition-colors" style={{ color: 'var(--text-body)' }}>{skill.name}</span>
+                      <span className="text-xs font-mono tabular-nums" style={{ color: 'var(--text-muted)' }}>{skill.level}%</span>
                     </div>
                     <div className="skill-bar">
                       <div

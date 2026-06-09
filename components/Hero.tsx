@@ -63,6 +63,10 @@ export default function Hero() {
               <span key={tool} className="text-[10px] px-2 py-1 rounded-full" style={{ background: 'var(--accent-soft)', border: '1px solid var(--accent-border)', color: 'var(--text-muted)' }}>{tool}</span>
             ))}
           </div>
+          {/* 向下滚动提示 */}
+          <div className="mt-8 flex flex-col items-center animate-bounce">
+            <span className="text-xs" style={{ color: 'var(--text-muted)' }}>↓ 向下探索</span>
+          </div>
         </div>
 
         {/* 社交链接 */}

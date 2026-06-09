@@ -7,12 +7,14 @@ import { useEffect } from 'react';
  */
 export default function ScrollReveal() {
   useEffect(() => {
+    let revealIndex = 0;
+
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry, index) => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // 错落延迟：每个元素递增 100ms
-            const delay = index * 100;
+            const delay = revealIndex * 100;
+            revealIndex++;
             setTimeout(() => {
               entry.target.classList.add('visible');
             }, delay);
@@ -23,8 +25,11 @@ export default function ScrollReveal() {
       { threshold: 0.15 }
     );
 
-    document.querySelectorAll('.scroll-reveal').forEach((el) => {
-      observer.observe(el);
+    // 延迟一帧确保 DOM 已渲染
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.scroll-reveal').forEach((el) => {
+        observer.observe(el);
+      });
     });
 
     return () => observer.disconnect();

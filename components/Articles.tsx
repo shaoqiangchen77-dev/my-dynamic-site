@@ -107,7 +107,14 @@ export default function Articles() {
               key={article.title}
               className={`glass card-hover float-${(i % 4) + 1} scroll-reveal overflow-hidden`}
             >
-              <div className={`h-40 bg-gradient-to-br ${article.cover} rounded-t-2xl`} />
+              <div className="relative">
+                <div className={`h-40 bg-gradient-to-br ${article.cover} rounded-t-2xl`} />
+                {i === 0 && !activeTag && (
+                  <span className="absolute top-3 right-3 text-[10px] px-2 py-0.5 rounded-full font-medium" style={{ background: 'rgba(212,168,67,0.9)', color: '#000' }}>
+                    置顶
+                  </span>
+                )}
+              </div>
               <div className="p-6">
                 <div className="flex gap-2 mb-3 flex-wrap">
                   {article.tags.map((tag) => (

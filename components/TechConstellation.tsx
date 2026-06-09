@@ -49,10 +49,12 @@ const colors: Record<string, string> = {
 
 export default function TechConstellation() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    const section = sectionRef.current;
+    if (!canvas || !section) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
@@ -67,6 +69,8 @@ export default function TechConstellation() {
     ctx.scale(dpr, dpr);
 
     let frame = 0;
+    let running = false;
+    let rafId: number;
 
     function draw() {
       if (!ctx) return;
@@ -92,37 +96,55 @@ export default function TechConstellation() {
         const color = colors[node.group];
 
         // 光晕
-        ctx.beginPath();
-        ctx.arc(x, y, node.r + 6, 0, Math.PI * 2);
-        ctx.fillStyle = color.replace(')', `,${0.1 * pulse})`).replace('rgb', 'rgba').replace('#', '');
-        const gradient = ctx.createRadialGradient(x, y, 0, x, y, node.r + 6);
+        const gradient = ctx!.createRadialGradient(x, y, 0, x, y, node.r + 6);
         gradient.addColorStop(0, color + '33');
         gradient.addColorStop(1, 'transparent');
-        ctx.fillStyle = gradient;
-        ctx.fill();
+        ctx!.beginPath();
+        ctx!.arc(x, y, node.r + 6, 0, Math.PI * 2);
+        ctx!.fillStyle = gradient;
+        ctx!.fill();
 
         // 节点
-        ctx.beginPath();
-        ctx.arc(x, y, node.r * 0.5, 0, Math.PI * 2);
-        ctx.fillStyle = color + (pulse > 0.85 ? 'ff' : 'aa');
-        ctx.fill();
+        ctx!.beginPath();
+        ctx!.arc(x, y, node.r * 0.5, 0, Math.PI * 2);
+        ctx!.fillStyle = color + (pulse > 0.85 ? 'ff' : 'aa');
+        ctx!.fill();
 
         // 文字
-        ctx.font = `${Math.max(9, node.r * 0.7)}px Inter, sans-serif`;
-        ctx.fillStyle = `rgba(255,255,255,${0.5 + pulse * 0.3})`;
-        ctx.textAlign = 'center';
-        ctx.fillText(node.name, x, y + node.r + 12);
+        ctx!.font = `${Math.max(9, node.r * 0.7)}px Inter, sans-serif`;
+        ctx!.fillStyle = `rgba(255,255,255,${0.5 + pulse * 0.3})`;
+        ctx!.textAlign = 'center';
+        ctx!.fillText(node.name, x, y + node.r + 12);
       });
 
       frame++;
-      requestAnimationFrame(draw);
+      if (running) rafId = requestAnimationFrame(draw);
     }
 
-    draw();
+    // 可见时才运行动画
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !running) {
+          running = true;
+          rafId = requestAnimationFrame(draw);
+        } else if (!entry.isIntersecting && running) {
+          running = false;
+          cancelAnimationFrame(rafId);
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(section);
+
+    return () => {
+      running = false;
+      cancelAnimationFrame(rafId);
+      observer.disconnect();
+    };
   }, []);
 
   return (
-    <section className="py-12 px-6">
+    <section ref={sectionRef} className="py-12 px-6">
       <div className="max-w-4xl mx-auto">
         <h3 className="title-md mb-6 text-center scroll-reveal">技术栈星图</h3>
         <div className="glass p-6 flex justify-center scroll-reveal">
