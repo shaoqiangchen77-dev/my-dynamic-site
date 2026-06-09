@@ -13,7 +13,7 @@ export default function ScrollReveal() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const delay = revealIndex * 100;
+            const delay = revealIndex * 50;
             revealIndex++;
             setTimeout(() => {
               entry.target.classList.add('visible');
@@ -22,7 +22,7 @@ export default function ScrollReveal() {
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
 
     // 延迟一帧确保 DOM 已渲染

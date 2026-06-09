@@ -13,7 +13,7 @@ export default function RainEffect() {
       if (!container) return [];
 
       const drops: HTMLDivElement[] = [];
-      const count = 40;
+      const count = 20;
 
       for (let i = 0; i < count; i++) {
         const drop = document.createElement('div');
