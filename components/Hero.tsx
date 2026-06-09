@@ -15,7 +15,7 @@ export default function Hero() {
         <div className="glass card-hover float-2 p-8 flex flex-col items-center text-center md:items-start md:text-left">
           {/* 头像 */}
           <div className="w-28 h-28 rounded-full glass-subtle flex items-center justify-center mb-6 overflow-hidden">
-            <div className="w-24 h-24 rounded-full bg-gradient-to-br from-purple-400 to-blue-400 flex items-center justify-center text-4xl font-bold text-white">
+            <div className="w-24 h-24 rounded-full flex items-center justify-center text-4xl font-bold" style={{ background: '#0a0a0a', color: '#d4a843' }}>
               尘
             </div>
           </div>

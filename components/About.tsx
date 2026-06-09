@@ -45,7 +45,7 @@ export default function About() {
             {/* 左侧：照片 */}
             <div className="flex flex-col items-center">
               <div className="w-48 h-48 rounded-2xl glass-subtle flex items-center justify-center mb-4 overflow-hidden">
-                <div className="w-44 h-44 rounded-xl bg-gradient-to-br from-purple-400 via-pink-400 to-blue-400 flex items-center justify-center text-6xl font-bold text-white">
+                <div className="w-44 h-44 rounded-xl flex items-center justify-center text-6xl font-bold" style={{ background: '#0a0a0a', color: '#d4a843' }}>
                   尘
                 </div>
               </div>
