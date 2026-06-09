@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import AvatarExplosion from './AvatarExplosion';
 
 const socialLinks = [
   { name: 'GitHub', icon: 'GH', href: 'https://github.com' },
@@ -37,13 +38,14 @@ function useTypewriter(text: string, speed = 50, delay = 800) {
 
 export default function Hero() {
   const { displayed, done } = useTypewriter(fullText, 40, 600);
+  const { explode } = AvatarExplosion();
 
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center px-6 pt-20">
       <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-8 items-center">
         {/* 个人信息 */}
         <div className="glass card-hover float-2 p-8 flex flex-col items-center text-center md:items-start md:text-left">
-          <div className="w-28 h-28 rounded-full glass-subtle flex items-center justify-center mb-6 overflow-hidden">
+          <div className="w-28 h-28 rounded-full glass-subtle flex items-center justify-center mb-6 overflow-hidden cursor-pointer" onClick={explode}>
             <div className="w-24 h-24 rounded-full flex items-center justify-center text-4xl font-bold" style={{ background: '#0a0a0a', color: '#d4a843' }}>
               尘
             </div>

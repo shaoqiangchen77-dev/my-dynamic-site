@@ -13,6 +13,10 @@ import LoadingScreen from '@/components/LoadingScreen';
 import ScrollProgress from '@/components/ScrollProgress';
 import BackToTop from '@/components/BackToTop';
 import MouseGlow from '@/components/MouseGlow';
+import StatsDashboard from '@/components/StatsDashboard';
+import QuoteRotator from '@/components/QuoteRotator';
+import TechConstellation from '@/components/TechConstellation';
+import KonamiEasterEgg from '@/components/KonamiEasterEgg';
 
 export default function Home() {
   return (
@@ -20,11 +24,15 @@ export default function Home() {
       <LoadingScreen />
       <ScrollProgress />
       <MouseGlow />
+      <KonamiEasterEgg />
       <Nav />
       <main>
         <Hero />
+        <QuoteRotator />
+        <StatsDashboard />
         <Articles />
         <Projects />
+        <TechConstellation />
         <Timeline />
         <section className="py-12 px-6">
           <div className="max-w-4xl mx-auto">
