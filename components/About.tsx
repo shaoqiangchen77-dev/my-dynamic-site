@@ -2,14 +2,16 @@
 import { useEffect, useRef } from 'react';
 
 const skills = [
-  { name: 'React / Next.js', level: 90 },
-  { name: 'TypeScript', level: 85 },
-  { name: 'Node.js', level: 80 },
-  { name: 'CSS / Tailwind', level: 88 },
-  { name: 'Python', level: 70 },
+  { name: 'Java / Spring Boot', level: 90 },
+  { name: 'Vue 3 / UniApp', level: 88 },
+  { name: 'MySQL / Redis', level: 88 },
+  { name: 'AI Agent / LLM', level: 75 },
+  { name: 'Claude Code / Cursor / Trae', level: 90 },
+  { name: 'TypeScript / Element Plus', level: 82 },
+  { name: 'Docker / K8s', level: 70 },
 ];
 
-const tags = ['前端开发', '后端开发', 'UI 设计', '开源贡献', '技术写作', '敏捷开发'];
+const tags = ['Java 后端', '前端开发', 'AI Agent', '微服务架构', 'AI 编程提效', '系统设计'];
 
 export default function About() {
   const barsRef = useRef<HTMLDivElement>(null);
@@ -44,7 +46,7 @@ export default function About() {
             <div className="flex flex-col items-center">
               <div className="w-48 h-48 rounded-2xl glass-subtle flex items-center justify-center mb-4 overflow-hidden">
                 <div className="w-44 h-44 rounded-xl bg-gradient-to-br from-purple-400 via-pink-400 to-blue-400 flex items-center justify-center text-6xl font-bold text-white">
-                  G
+                  尘
                 </div>
               </div>
               <div className="flex flex-wrap gap-2 justify-center mt-2">
@@ -67,9 +69,13 @@ export default function About() {
             <div>
               <h3 className="title-md mb-4">个人简介</h3>
               <p className="text-body text-sm leading-relaxed mb-6">
-                我是一名热爱技术的全栈开发者，拥有多年的 Web 开发经验。
-                擅长使用 React、Next.js、TypeScript 等现代技术栈构建高性能应用。
-                热衷于开源社区，喜欢探索新技术并分享学习心得。
+                我是一名 Java 后端开发者，同时深耕前端工程化与 AI Agent 领域。
+                后端方面，熟练掌握 Spring Boot、微服务架构、JVM 调优与数据库优化；
+                前端方面，擅长 Vue 3、UniApp、TypeScript，实现 H5/小程序/App 跨端开发；
+                Agent 方向，积极探索 LLM 应用、RAG、工具调用与多智能体协作。
+                日常深度使用 Claude Code、Cursor、Trae、扣子、Codex 等 AI 编程工具，
+                将 AI 融入开发全流程，显著提升编码效率与代码质量。
+                三大技术栈交叉融合，致力于打造端到端的智能化产品。
               </p>
 
               <h3 className="title-md mb-4">技能</h3>

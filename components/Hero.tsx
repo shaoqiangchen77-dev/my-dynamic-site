@@ -16,16 +16,21 @@ export default function Hero() {
           {/* 头像 */}
           <div className="w-28 h-28 rounded-full glass-subtle flex items-center justify-center mb-6 overflow-hidden">
             <div className="w-24 h-24 rounded-full bg-gradient-to-br from-purple-400 to-blue-400 flex items-center justify-center text-4xl font-bold text-white">
-              G
+              尘
             </div>
           </div>
           <h1 className="title-xl mb-3">你好，我是 尘堑</h1>
           <p className="text-body text-lg leading-relaxed">
-            全栈开发者 / 开源爱好者 / 终身学习者
+            Java 后端 / 前端开发 / AI Agent 探索者
           </p>
           <p className="text-muted mt-2">
-            热爱技术，专注于构建优雅的 Web 应用
+            专注于 Java 生态与 Vue/UniApp 全端开发，深度使用 AI 编程工具提效
           </p>
+          <div className="flex flex-wrap gap-2 mt-3 justify-center md:justify-start">
+            {['Claude Code', 'Cursor', '扣子', 'Codex', 'Trae'].map((tool) => (
+              <span key={tool} className="text-[10px] px-2 py-1 rounded-full" style={{ background: 'var(--accent-soft)', border: '1px solid var(--accent-border)', color: 'var(--text-muted)' }}>{tool}</span>
+            ))}
+          </div>
         </div>
 
         {/* 社交链接 */}
