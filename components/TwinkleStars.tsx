@@ -49,7 +49,7 @@ export default function TwinkleStars() {
       stars = [];
     }
 
-    const darkThemes = ['dark', 'aurora'];
+    const darkThemes = ['dark', 'aurora', 'dao'];
     const theme = document.documentElement.getAttribute('data-theme') || '';
     if (darkThemes.includes(theme)) createStars(container);
 

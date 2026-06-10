@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 
-type Theme = 'light' | 'dark' | 'cyberpunk' | 'aurora' | 'system';
+type Theme = 'light' | 'dark' | 'cyberpunk' | 'aurora' | 'dao' | 'system';
 
 function getEffectiveTheme(mode: Theme): string {
   if (mode === 'system') {
@@ -56,7 +56,8 @@ export default function ThemeToggle() {
     { key: 'light', icon: '☀', label: '白天' },
     { key: 'dark', icon: '☾', label: '银河' },
     { key: 'cyberpunk', icon: '⚡', label: '赛博' },
-    { key: 'aurora', icon: '✦', label: '极光' },
+    { key: 'aurora', icon: '卍', label: '佛陀' },
+    { key: 'dao', icon: '☯', label: '道祖' },
     { key: 'system', icon: '◎', label: '系统' },
   ];
 

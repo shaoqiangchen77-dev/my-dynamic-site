@@ -6,13 +6,14 @@ const themeNames: Record<string, string> = {
   light: '☀ 白天',
   dark: '☾ 银河',
   cyberpunk: '⚡ 赛博',
-  aurora: '✦ 极光',
+  aurora: '卍 佛陀',
+  dao: '☯ 道祖',
   system: '◎ 系统',
 };
 
 export default function KeyboardShortcuts() {
   useEffect(() => {
-    const themes = ['light', 'dark', 'cyberpunk', 'aurora', 'system'];
+    const themes = ['light', 'dark', 'cyberpunk', 'aurora', 'dao', 'system'];
 
     function onKeyDown(e: KeyboardEvent) {
       const tag = (e.target as HTMLElement).tagName;

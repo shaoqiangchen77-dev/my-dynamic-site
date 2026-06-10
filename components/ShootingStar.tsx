@@ -9,7 +9,7 @@ export default function ShootingStar() {
     function onClick(e: MouseEvent) {
       // 只在暗色主题下生效
       const theme = document.documentElement.getAttribute('data-theme');
-      if (theme !== 'dark' && theme !== 'cyberpunk' && theme !== 'aurora') return;
+      if (theme !== 'dark' && theme !== 'cyberpunk' && theme !== 'aurora' && theme !== 'dao') return;
       // 点击在按钮/链接/输入框上时不触发
       const tag = (e.target as HTMLElement).tagName;
       if (['A', 'BUTTON', 'INPUT', 'TEXTAREA', 'SELECT'].includes(tag)) return;
