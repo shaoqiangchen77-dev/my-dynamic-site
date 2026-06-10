@@ -130,38 +130,109 @@ export default function Hero() {
         {/* 个人信息 */}
         <div className="glass card-hover float-2 p-8 flex flex-col items-center text-center md:items-start md:text-left">
           <div
-            className="w-32 h-32 rounded-full flex items-center justify-center mb-6 cursor-pointer relative"
+            className="mb-6 cursor-pointer"
             onClick={explode}
-            style={{
-              background: 'conic-gradient(from 0deg, #b8860b, #d4a843, #ffd700, #d4a843, #b8860b, #d4a843, #ffd700, #d4a843, #b8860b)',
-              padding: '3px',
-            }}
           >
-            <div
-              className="w-full h-full rounded-full flex items-center justify-center relative overflow-hidden"
-              style={{ background: '#0a0a0a' }}
+            <svg
+              viewBox="0 0 120 120"
+              className="w-28 h-28 md:w-32 md:h-32"
+              style={{ filter: 'drop-shadow(0 0 12px rgba(212,168,67,0.25))' }}
             >
-              {/* 金色光泽动画层 */}
-              <div
-                className="absolute inset-0 rounded-full"
-                style={{
-                  background: 'linear-gradient(135deg, transparent 30%, rgba(212,168,67,0.08) 45%, rgba(255,215,0,0.12) 50%, rgba(212,168,67,0.08) 55%, transparent 70%)',
-                  animation: 'gold-shine 3s ease-in-out infinite',
-                }}
-              />
-              <span
-                className="relative text-5xl font-bold"
-                style={{
-                  color: '#d4a843',
-                  textShadow: '0 0 20px rgba(212,168,67,0.4), 0 0 40px rgba(212,168,67,0.15), 0 2px 4px rgba(0,0,0,0.5)',
-                  fontFamily: "'Inter', serif",
-                  fontWeight: 800,
-                  letterSpacing: '0.05em',
-                }}
-              >
-                尘
-              </span>
-            </div>
+              <defs>
+                {/* 金色渐变 */}
+                <linearGradient id="seal-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#c9952a" />
+                  <stop offset="25%" stop-color="#e8c56d" />
+                  <stop offset="50%" stop-color="#f5e09a" />
+                  <stop offset="75%" stop-color="#d4a843" />
+                  <stop offset="100%" stop-color="#a07828" />
+                </linearGradient>
+                {/* 深金渐变 — 立体感 */}
+                <linearGradient id="seal-dark" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#8b6914" />
+                  <stop offset="50%" stop-color="#b8922e" />
+                  <stop offset="100%" stop-color="#7a5c12" />
+                </linearGradient>
+                {/* 内发光 */}
+                <radialGradient id="seal-glow" cx="50%" cy="45%" r="45%">
+                  <stop offset="0%" stop-color="#f5e09a" stop-opacity="0.12" />
+                  <stop offset="100%" stop-color="#0a0a0a" stop-opacity="0" />
+                </radialGradient>
+                {/* 圆形印章裁剪 */}
+                <clipPath id="seal-clip">
+                  <circle cx="60" cy="60" r="54" />
+                </clipPath>
+              </defs>
+
+              {/* 底色 */}
+              <circle cx="60" cy="60" r="56" fill="#0c0c0c" />
+
+              {/* 外圈 — 回纹边框 */}
+              <circle cx="60" cy="60" r="55" fill="none" stroke="url(#seal-gold)" strokeWidth="2" opacity="0.8" />
+              <circle cx="60" cy="60" r="52" fill="none" stroke="url(#seal-gold)" strokeWidth="0.8" opacity="0.4" />
+              {/* 内圈 */}
+              <circle cx="60" cy="60" r="46" fill="none" stroke="url(#seal-gold)" strokeWidth="1.2" opacity="0.5" />
+              <circle cx="60" cy="60" r="43" fill="none" stroke="url(#seal-gold)" strokeWidth="0.5" opacity="0.25" />
+
+              {/* 四角装饰点 — 传统印钮 */}
+              <circle cx="60" cy="10" r="2" fill="url(#seal-gold)" opacity="0.6" />
+              <circle cx="60" cy="110" r="2" fill="url(#seal-gold)" opacity="0.6" />
+              <circle cx="10" cy="60" r="2" fill="url(#seal-gold)" opacity="0.6" />
+              <circle cx="110" cy="60" r="2" fill="url(#seal-gold)" opacity="0.6" />
+
+              {/* 内部光晕 */}
+              <circle cx="60" cy="60" r="46" fill="url(#seal-glow)" />
+
+              {/* 尘字 — 篆书风格 SVG 描边 */}
+              <g clipPath="url(#seal-clip)">
+                {/* 上部 "小" — 三笔撇捺竖 */}
+                {/* 竖钩 */}
+                <path
+                  d="M60 22 L60 52"
+                  stroke="url(#seal-gold)" strokeWidth="3.5" strokeLinecap="round" fill="none"
+                />
+                {/* 左撇 */}
+                <path
+                  d="M60 28 Q52 32 42 40"
+                  stroke="url(#seal-gold)" strokeWidth="3" strokeLinecap="round" fill="none"
+                />
+                {/* 右捺 */}
+                <path
+                  d="M60 28 Q68 32 78 40"
+                  stroke="url(#seal-gold)" strokeWidth="3" strokeLinecap="round" fill="none"
+                />
+                {/* 左点 */}
+                <path
+                  d="M48 38 Q44 42 42 47"
+                  stroke="url(#seal-gold)" strokeWidth="2.5" strokeLinecap="round" fill="none"
+                />
+                {/* 右点 */}
+                <path
+                  d="M72 38 Q76 42 78 47"
+                  stroke="url(#seal-gold)" strokeWidth="2.5" strokeLinecap="round" fill="none"
+                />
+
+                {/* 下部 "土" — 横竖横 */}
+                {/* 上横 */}
+                <path
+                  d="M38 60 L82 60"
+                  stroke="url(#seal-gold)" strokeWidth="3.5" strokeLinecap="round" fill="none"
+                />
+                {/* 竖 */}
+                <path
+                  d="M60 52 L60 92"
+                  stroke="url(#seal-gold)" strokeWidth="3.5" strokeLinecap="round" fill="none"
+                />
+                {/* 下横 — 篆书风格加长，微微上弧 */}
+                <path
+                  d="M32 85 Q60 80 88 85"
+                  stroke="url(#seal-gold)" strokeWidth="4" strokeLinecap="round" fill="none"
+                />
+              </g>
+
+              {/* 顶部光泽 — 模拟金属高光 */}
+              <ellipse cx="60" cy="30" rx="30" ry="12" fill="url(#seal-glow)" opacity="0.3" />
+            </svg>
           </div>
           <h1 className="title-xl mb-3 gradient-text">
             {titleDisplayed}
