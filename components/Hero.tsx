@@ -9,6 +9,8 @@ const socialLinks = [
   { name: 'Blog', icon: 'BG', href: '#articles' },
 ];
 
+const titleText = '你好，我是 尘堑';
+
 const texts = [
   '专注于 Java 生态与 Vue/UniApp 全端开发，深度使用 AI 编程工具提效',
   '用 Spring Boot 构建企业级微服务，用 Vue 3 打造跨端应用',
@@ -16,23 +18,84 @@ const texts = [
   'Claude Code / Cursor / 扣子 / Codex / Trae 全链路提效',
 ];
 
+/** 标题打字机：10s 一轮询（打字→停留→擦除→停留→循环） */
+function useTitleTypewriter(text: string, cycleMs = 10000) {
+  const [displayed, setDisplayed] = useState('');
+  const [showCursor, setShowCursor] = useState(true);
+  const len = text.length;
+
+  useEffect(() => {
+    // 时间分配：打字30% | 停留30% | 擦除20% | 停留20%
+    const typeDur = cycleMs * 0.3;
+    const holdDur = cycleMs * 0.3;
+    const eraseDur = cycleMs * 0.2;
+    const gapDur = cycleMs * 0.2;
+    const typeDelay = typeDur / len;
+    const eraseDelay = eraseDur / len;
+
+    let step = 0; // 0=打字 1=停留 2=擦除 3=停留
+    let charIdx = 0;
+    let raf: ReturnType<typeof setTimeout>;
+
+    const tick = () => {
+      switch (step) {
+        case 0: // 打字
+          charIdx++;
+          setDisplayed(text.slice(0, charIdx));
+          if (charIdx >= len) {
+            step = 1;
+            raf = setTimeout(tick, holdDur);
+          } else {
+            raf = setTimeout(tick, typeDelay);
+          }
+          break;
+        case 1: // 停留（打完）
+          step = 2;
+          setShowCursor(false);
+          raf = setTimeout(tick, 200);
+          break;
+        case 2: // 擦除
+          setShowCursor(true);
+          charIdx--;
+          setDisplayed(text.slice(0, charIdx));
+          if (charIdx <= 0) {
+            step = 3;
+            raf = setTimeout(tick, gapDur);
+          } else {
+            raf = setTimeout(tick, eraseDelay);
+          }
+          break;
+        case 3: // 停留（擦完）
+          step = 0;
+          raf = setTimeout(tick, 200);
+          break;
+      }
+    };
+
+    raf = setTimeout(tick, 500);
+    return () => clearTimeout(raf);
+  }, [text, cycleMs, len]);
+
+  return { displayed, showCursor };
+}
+
 function useTypewriter(texts: string[], typeSpeed = 40, deleteSpeed = 20, pause = 2000) {
   const [displayed, setDisplayed] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     let textIdx = 0;
     let charIdx = 0;
+    let deleting = false;
     let timeout: ReturnType<typeof setTimeout>;
 
     const tick = () => {
       const current = texts[textIdx];
 
-      if (!isDeleting) {
+      if (!deleting) {
         charIdx++;
         setDisplayed(current.slice(0, charIdx));
         if (charIdx === current.length) {
-          timeout = setTimeout(() => { setIsDeleting(true); tick(); }, pause);
+          timeout = setTimeout(() => { deleting = true; tick(); }, pause);
           return;
         }
         timeout = setTimeout(tick, typeSpeed);
@@ -40,7 +103,7 @@ function useTypewriter(texts: string[], typeSpeed = 40, deleteSpeed = 20, pause 
         charIdx--;
         setDisplayed(current.slice(0, charIdx));
         if (charIdx === 0) {
-          setIsDeleting(false);
+          deleting = false;
           textIdx = (textIdx + 1) % texts.length;
           timeout = setTimeout(tick, 400);
           return;
@@ -53,11 +116,12 @@ function useTypewriter(texts: string[], typeSpeed = 40, deleteSpeed = 20, pause 
     return () => clearTimeout(timeout);
   }, [texts, typeSpeed, deleteSpeed, pause]);
 
-  return { displayed, isDeleting };
+  return { displayed };
 }
 
 export default function Hero() {
-  const { displayed, isDeleting } = useTypewriter(texts);
+  const { displayed: titleDisplayed, showCursor: titleCursor } = useTitleTypewriter(titleText, 10000);
+  const { displayed } = useTypewriter(texts);
   const { explode } = AvatarExplosion();
 
   return (
@@ -70,7 +134,10 @@ export default function Hero() {
               尘
             </div>
           </div>
-          <h1 className="title-xl mb-3 gradient-text">你好，我是 尘堑</h1>
+          <h1 className="title-xl mb-3 gradient-text">
+            {titleDisplayed}
+            {titleCursor && <span className="inline-block w-0.5 h-7 ml-0.5 align-middle" style={{ background: 'var(--accent)', animation: 'blink 0.8s step-end infinite' }} />}
+          </h1>
           <p className="text-body text-lg leading-relaxed">
             Java 后端 / 前端开发 / AI Agent 探索者
           </p>
