@@ -5,7 +5,6 @@ import Projects from '@/components/Projects';
 import Timeline from '@/components/Timeline';
 import GitHubCalendar from '@/components/GitHubCalendar';
 import About from '@/components/About';
-import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import ThemeToggle from '@/components/ThemeToggle';
 import ScrollReveal from '@/components/ScrollReveal';
@@ -54,7 +53,6 @@ export default function Home() {
         <About />
         <MiniGame />
         <MessageBoard />
-        <Contact />
       </main>
       <Footer />
       <ThemeToggle />
