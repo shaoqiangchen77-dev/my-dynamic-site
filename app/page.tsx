@@ -23,6 +23,7 @@ import BadgeWall from '@/components/BadgeWall';
 import SkillCube from '@/components/SkillCube';
 import MessageBoard from '@/components/MessageBoard';
 import ParallaxSection from '@/components/ParallaxSection';
+import MiniGame from '@/components/MiniGame';
 
 export default function Home() {
   return (
@@ -51,6 +52,7 @@ export default function Home() {
           </div>
         </section>
         <About />
+        <MiniGame />
         <MessageBoard />
         <Contact />
       </main>
