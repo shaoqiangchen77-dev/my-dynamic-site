@@ -120,7 +120,7 @@ function useTypewriter(texts: string[], typeSpeed = 40, deleteSpeed = 20, pause 
 }
 
 export default function Hero() {
-  const { displayed: titleDisplayed, showCursor: titleCursor } = useTitleTypewriter(titleText, 10000);
+  const { displayed: titleDisplayed, showCursor: titleCursor } = useTitleTypewriter(titleText, 6667);
   const { displayed } = useTypewriter(texts);
   const { explode } = AvatarExplosion();
 
@@ -133,46 +133,24 @@ export default function Hero() {
             className="mb-6 cursor-pointer"
             onClick={explode}
           >
-            <svg
-              viewBox="0 0 120 120"
-              className="w-28 h-28 md:w-32 md:h-32"
-              style={{ filter: 'drop-shadow(0 0 6px rgba(200,50,50,0.3))' }}
-            >
-              <defs>
-                <linearGradient id="seal-red" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#b71c1c" />
-                  <stop offset="50%" stop-color="#d32f2f" />
-                  <stop offset="100%" stop-color="#9a1a1a" />
-                </linearGradient>
-                <filter id="seal-worn">
-                  <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="n" />
-                  <feColorMatrix type="saturate" values="0" in="n" result="g" />
-                  <feComponentTransfer in="g" result="m">
-                    <feFuncA type="discrete" tableValues="0 0 0.1 0.3 0.5 0.7 0.85 1 1 1" />
-                  </feComponentTransfer>
-                  <feComposite in="SourceGraphic" in2="m" operator="out" />
-                </filter>
-              </defs>
-
-              {/* 深色底 */}
-              <rect x="2" y="2" width="116" height="116" rx="4" fill="#0c0c0c" />
-
-              {/* 外框 — 双层方框 */}
-              <rect x="6" y="6" width="108" height="108" rx="2" fill="none" stroke="url(#seal-red)" strokeWidth="3.5" />
-              <rect x="11" y="11" width="98" height="98" rx="1" fill="none" stroke="url(#seal-red)" strokeWidth="1.2" opacity="0.5" />
-
-              {/* 中心分格线 */}
-              <line x1="60" y1="14" x2="60" y2="106" stroke="url(#seal-red)" strokeWidth="1" opacity="0.3" />
-              <line x1="14" y1="58" x2="106" y2="58" stroke="url(#seal-red)" strokeWidth="1" opacity="0.3" />
-
-              {/* 受命于天 既寿永昌 — 玉玺铭文 */}
-              <g filter="url(#seal-worn)">
-                <text x="37" y="40" textAnchor="middle" fill="url(#seal-red)" fontFamily="SimSun, serif" fontWeight="bold" fontSize="28">受命</text>
-                <text x="83" y="40" textAnchor="middle" fill="url(#seal-red)" fontFamily="SimSun, serif" fontWeight="bold" fontSize="28">于天</text>
-                <text x="37" y="86" textAnchor="middle" fill="url(#seal-red)" fontFamily="SimSun, serif" fontWeight="bold" fontSize="28">既寿</text>
-                <text x="83" y="86" textAnchor="middle" fill="url(#seal-red)" fontFamily="SimSun, serif" fontWeight="bold" fontSize="28">永昌</text>
-              </g>
-            </svg>
+            <div className="glass-subtle rounded-2xl p-4">
+              <div
+                className="w-24 h-24 md:w-28 md:h-28 rounded-full flex items-center justify-center"
+                style={{ background: '#0c0c0c' }}
+              >
+                <span
+                  className="text-4xl md:text-5xl font-bold"
+                  style={{
+                    background: 'linear-gradient(135deg, #c9952a, #f5e09a, #d4a843)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    filter: 'drop-shadow(0 0 6px rgba(212,168,67,0.3))',
+                  }}
+                >
+                  尘
+                </span>
+              </div>
+            </div>
           </div>
           <h1 className="title-xl mb-3 gradient-text">
             {titleDisplayed}
