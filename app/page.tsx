@@ -13,10 +13,16 @@ import LoadingScreen from '@/components/LoadingScreen';
 import ScrollProgress from '@/components/ScrollProgress';
 import BackToTop from '@/components/BackToTop';
 import MouseGlow from '@/components/MouseGlow';
+import MouseTrail from '@/components/MouseTrail';
 import StatsDashboard from '@/components/StatsDashboard';
 import QuoteRotator from '@/components/QuoteRotator';
 import TechConstellation from '@/components/TechConstellation';
 import KonamiEasterEgg from '@/components/KonamiEasterEgg';
+import ShootingStar from '@/components/ShootingStar';
+import BadgeWall from '@/components/BadgeWall';
+import SkillCube from '@/components/SkillCube';
+import MessageBoard from '@/components/MessageBoard';
+import ParallaxSection from '@/components/ParallaxSection';
 
 export default function Home() {
   return (
@@ -24,15 +30,20 @@ export default function Home() {
       <LoadingScreen />
       <ScrollProgress />
       <MouseGlow />
+      <MouseTrail />
       <KonamiEasterEgg />
+      <ShootingStar />
+      <ParallaxSection />
       <Nav />
       <main>
         <Hero />
         <QuoteRotator />
         <StatsDashboard />
+        <BadgeWall />
         <Articles />
         <Projects />
         <TechConstellation />
+        <SkillCube />
         <Timeline />
         <section className="py-12 px-6">
           <div className="max-w-4xl mx-auto">
@@ -40,6 +51,7 @@ export default function Home() {
           </div>
         </section>
         <About />
+        <MessageBoard />
         <Contact />
       </main>
       <Footer />

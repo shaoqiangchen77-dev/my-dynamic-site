@@ -1,6 +1,7 @@
 import './globals.css';
 import RainEffect from '@/components/RainEffect';
 import TwinkleStars from '@/components/TwinkleStars';
+import CardRefraction from '@/components/CardRefraction';
 
 export const metadata = {
   title: 'banana博客',
@@ -15,10 +16,10 @@ const themeScript = `
 (function(){
   var t=localStorage.getItem('theme')||'system';
   var d=document.documentElement;
-  if(t==='dark'||(t==='system'&&matchMedia('(prefers-color-scheme:dark)').matches)){
-    d.setAttribute('data-theme','dark');
+  if(t==='system'){
+    d.setAttribute('data-theme',matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
   }else{
-    d.setAttribute('data-theme','light');
+    d.setAttribute('data-theme',t);
   }
 })()
 `;
@@ -42,6 +43,7 @@ export default function RootLayout({
         <div className="galaxy-glow" />
         <RainEffect />
         <TwinkleStars />
+        <CardRefraction />
         {children}
       </body>
     </html>

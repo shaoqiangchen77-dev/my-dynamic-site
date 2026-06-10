@@ -49,12 +49,13 @@ export default function TwinkleStars() {
       stars = [];
     }
 
-    const theme = document.documentElement.getAttribute('data-theme');
-    if (theme === 'dark') createStars(container);
+    const darkThemes = ['dark', 'aurora'];
+    const theme = document.documentElement.getAttribute('data-theme') || '';
+    if (darkThemes.includes(theme)) createStars(container);
 
     const observer = new MutationObserver(() => {
-      const current = document.documentElement.getAttribute('data-theme');
-      if (current === 'dark') {
+      const current = document.documentElement.getAttribute('data-theme') || '';
+      if (darkThemes.includes(current)) {
         if (stars.length === 0) createStars(container);
       } else {
         removeStars();

@@ -9,35 +9,55 @@ const socialLinks = [
   { name: 'Blog', icon: 'BG', href: '#articles' },
 ];
 
-const fullText = '专注于 Java 生态与 Vue/UniApp 全端开发，深度使用 AI 编程工具提效';
+const texts = [
+  '专注于 Java 生态与 Vue/UniApp 全端开发，深度使用 AI 编程工具提效',
+  '用 Spring Boot 构建企业级微服务，用 Vue 3 打造跨端应用',
+  '探索 AI Agent 架构，让 LLM 融入开发全流程',
+  'Claude Code / Cursor / 扣子 / Codex / Trae 全链路提效',
+];
 
-function useTypewriter(text: string, speed = 50, delay = 800) {
+function useTypewriter(texts: string[], typeSpeed = 40, deleteSpeed = 20, pause = 2000) {
   const [displayed, setDisplayed] = useState('');
-  const [done, setDone] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    let i = 0;
+    let textIdx = 0;
+    let charIdx = 0;
     let timeout: ReturnType<typeof setTimeout>;
-    const start = setTimeout(() => {
-      const type = () => {
-        if (i < text.length) {
-          setDisplayed(text.slice(0, i + 1));
-          i++;
-          timeout = setTimeout(type, speed);
-        } else {
-          setDone(true);
-        }
-      };
-      type();
-    }, delay);
-    return () => { clearTimeout(start); clearTimeout(timeout); };
-  }, [text, speed, delay]);
 
-  return { displayed, done };
+    const tick = () => {
+      const current = texts[textIdx];
+
+      if (!isDeleting) {
+        charIdx++;
+        setDisplayed(current.slice(0, charIdx));
+        if (charIdx === current.length) {
+          timeout = setTimeout(() => { setIsDeleting(true); tick(); }, pause);
+          return;
+        }
+        timeout = setTimeout(tick, typeSpeed);
+      } else {
+        charIdx--;
+        setDisplayed(current.slice(0, charIdx));
+        if (charIdx === 0) {
+          setIsDeleting(false);
+          textIdx = (textIdx + 1) % texts.length;
+          timeout = setTimeout(tick, 400);
+          return;
+        }
+        timeout = setTimeout(tick, deleteSpeed);
+      }
+    };
+
+    timeout = setTimeout(tick, 600);
+    return () => clearTimeout(timeout);
+  }, [texts, typeSpeed, deleteSpeed, pause]);
+
+  return { displayed, isDeleting };
 }
 
 export default function Hero() {
-  const { displayed, done } = useTypewriter(fullText, 40, 600);
+  const { displayed, isDeleting } = useTypewriter(texts);
   const { explode } = AvatarExplosion();
 
   return (
@@ -56,7 +76,7 @@ export default function Hero() {
           </p>
           <p className="text-muted mt-2 min-h-[1.75rem]">
             {displayed}
-            <span className="inline-block w-0.5 h-4 ml-0.5 align-middle" style={{ background: 'var(--text-muted)', opacity: done ? 0 : 1, animation: 'blink 0.8s step-end infinite' }} />
+            <span className="inline-block w-0.5 h-4 ml-0.5 align-middle" style={{ background: 'var(--text-muted)', animation: 'blink 0.8s step-end infinite' }} />
           </p>
           <div className="flex flex-wrap gap-2 mt-3 justify-center md:justify-start">
             {['Claude Code', 'Cursor', '扣子', 'Codex', 'Trae'].map((tool) => (
