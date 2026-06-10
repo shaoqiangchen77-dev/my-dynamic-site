@@ -23,6 +23,12 @@ import SkillCube from '@/components/SkillCube';
 import MessageBoard from '@/components/MessageBoard';
 import ParallaxSection from '@/components/ParallaxSection';
 import MiniGame from '@/components/MiniGame';
+import SideNav from '@/components/SideNav';
+import KeyboardShortcuts from '@/components/KeyboardShortcuts';
+import FriendLinks from '@/components/FriendLinks';
+import CommandPalette from '@/components/CommandPalette';
+import Toast from '@/components/Toast';
+import MobileBottomNav from '@/components/MobileBottomNav';
 
 export default function Home() {
   return (
@@ -34,6 +40,11 @@ export default function Home() {
       <KonamiEasterEgg />
       <ShootingStar />
       <ParallaxSection />
+      <KeyboardShortcuts />
+      <CommandPalette />
+      <Toast />
+      <SideNav />
+      <MobileBottomNav />
       <Nav />
       <main>
         <Hero />
@@ -51,6 +62,7 @@ export default function Home() {
           </div>
         </section>
         <About />
+        <FriendLinks />
         <MiniGame />
         <MessageBoard />
       </main>

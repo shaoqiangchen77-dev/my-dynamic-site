@@ -31,7 +31,18 @@ export default function ThemeToggle() {
       }
     };
     mql.addEventListener('change', onChange);
-    return () => mql.removeEventListener('change', onChange);
+
+    // 监听键盘快捷键切换主题的事件
+    const onThemeChange = (e: Event) => {
+      const theme = (e as CustomEvent).detail;
+      setTheme(theme);
+    };
+    window.addEventListener('theme-change', onThemeChange);
+
+    return () => {
+      mql.removeEventListener('change', onChange);
+      window.removeEventListener('theme-change', onThemeChange);
+    };
   }, []);
 
   function changeTheme(t: Theme) {

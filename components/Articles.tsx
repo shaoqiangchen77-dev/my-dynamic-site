@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import ArticleReactions from './ArticleReactions';
 
 const articles = [
   {
@@ -134,10 +135,11 @@ export default function Articles() {
                 </div>
                 <h3 className="title-md mb-2">{article.title}</h3>
                 <p className="text-body text-sm leading-relaxed mb-3">{article.summary}</p>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between mb-2">
                   <span className="text-muted text-xs">{article.date}</span>
                   <span className="text-muted text-xs">{Math.max(3, Math.ceil(article.summary.length / 80))} 分钟阅读</span>
                 </div>
+                <ArticleReactions articleId={article.title} />
               </div>
             </article>
           ))}

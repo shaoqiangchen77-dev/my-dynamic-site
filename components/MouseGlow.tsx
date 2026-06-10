@@ -14,13 +14,21 @@ export default function MouseGlow() {
       zIndex: '0',
       background: 'radial-gradient(circle, rgba(168,85,247,0.08) 0%, transparent 70%)',
       transform: 'translate(-50%, -50%)',
-      transition: 'left 0.15s ease, top 0.15s ease',
+      willChange: 'left, top',
+      transition: 'left 0.15s ease-out, top 0.15s ease-out',
     });
     document.body.appendChild(glow);
 
+    let ticking = false;
     const onMove = (e: MouseEvent) => {
-      glow.style.left = e.clientX + 'px';
-      glow.style.top = e.clientY + 'px';
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(() => {
+          glow.style.left = e.clientX + 'px';
+          glow.style.top = e.clientY + 'px';
+          ticking = false;
+        });
+      }
     };
     window.addEventListener('mousemove', onMove, { passive: true });
 

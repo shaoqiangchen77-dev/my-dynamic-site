@@ -325,11 +325,11 @@ body {
     0deg,
     transparent,
     transparent 3px,
-    rgba(0,0,0,0.05) 3px,
-    rgba(0,0,0,0.05) 4px
+    rgba(0,0,0,0.03) 3px,
+    rgba(0,0,0,0.03) 4px
   );
   pointer-events: none;
-  z-index: 9990;
+  z-index: -1;
 }
 
 /* 极光背景 */
@@ -387,6 +387,33 @@ body {
   100% { transform: rotateX(-15deg) rotateY(360deg); }
 }
 
+/* 赛博霓虹 — 标题霓虹文字 */
+[data-theme="cyberpunk"] .title-xl {
+  text-shadow: 0 0 10px rgba(0,255,255,0.3), 0 0 20px rgba(0,255,255,0.15);
+}
+[data-theme="cyberpunk"] .title-md {
+  text-shadow: 0 0 8px rgba(255,0,255,0.2);
+}
+/* 极光 — 标题微光 */
+[data-theme="aurora"] .title-xl {
+  text-shadow: 0 0 12px rgba(40,200,120,0.2);
+}
+
+/* 赛博霓虹 — 卡片霓虹边光 */
+[data-theme="cyberpunk"] .glass {
+  box-shadow: 0 0 15px rgba(0,255,255,0.08), 0 0 30px rgba(255,0,255,0.05), 0 8px 32px var(--glass-shadow);
+}
+[data-theme="cyberpunk"] .glass:hover {
+  box-shadow: 0 0 20px rgba(0,255,255,0.15), 0 0 40px rgba(255,0,255,0.1), 0 8px 32px var(--glass-shadow-hover);
+}
+/* 极光 — 卡片微光 */
+[data-theme="aurora"] .glass {
+  box-shadow: 0 0 20px rgba(40,200,120,0.06), 0 8px 32px var(--glass-shadow);
+}
+[data-theme="aurora"] .glass:hover {
+  box-shadow: 0 0 30px rgba(40,200,120,0.12), 0 8px 32px var(--glass-shadow-hover);
+}
+
 /* 卡片折射光效 */
 .glass::after {
   content: '';
@@ -395,11 +422,11 @@ body {
   border-radius: inherit;
   background: radial-gradient(
     circle 200px at var(--refract-x, 50%) var(--refract-y, 50%),
-    rgba(255,255,255,0.06) 0%,
+    rgba(255,255,255,0.08) 0%,
     transparent 70%
   );
   pointer-events: none;
-  opacity: 0;
+  opacity: 0.4;
   transition: opacity 0.3s ease;
 }
 
@@ -411,6 +438,7 @@ body {
    毛玻璃核心样式
    ============================================ */
 .glass {
+  position: relative;
   background: var(--glass-bg);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
@@ -421,6 +449,7 @@ body {
 }
 
 .glass-strong {
+  position: relative;
   background: var(--glass-bg-strong);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -431,6 +460,7 @@ body {
 }
 
 .glass-subtle {
+  position: relative;
   background: var(--glass-bg-subtle);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
@@ -715,4 +745,49 @@ body {
 @keyframes particle-burst {
   0%   { transform: translate(0, 0); opacity: 1; }
   100% { transform: translate(var(--tx), var(--ty)); opacity: 0; }
+}
+
+/* ============================================
+   渐变文字 — Hero 标题
+   ============================================ */
+.gradient-text {
+  background: linear-gradient(135deg, var(--text-primary) 0%, #d4a843 50%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   滚动指示器鼠标图标
+   ============================================ */
+.scroll-mouse {
+  width: 22px;
+  height: 34px;
+  border: 2px solid var(--glass-border);
+  border-radius: 12px;
+  position: relative;
+}
+.scroll-mouse::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--text-muted);
+  animation: scroll-dot 1.5s ease-in-out infinite;
+}
+@keyframes scroll-dot {
+  0%   { transform: translateX(-50%) translateY(0); opacity: 1; }
+  100% { transform: translateX(-50%) translateY(10px); opacity: 0; }
+}
+
+/* ============================================
+   键盘按键样式
+   ============================================ */
+kbd {
+  font-family: 'Inter', monospace;
+  font-size: 10px;
 }

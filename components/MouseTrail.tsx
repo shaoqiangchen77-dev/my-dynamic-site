@@ -49,7 +49,7 @@ export default function MouseTrail() {
       const dx = e.clientX - lastX;
       const dy = e.clientY - lastY;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 8) return; // 移动距离太小不生成
+      if (dist < 12) return; // 移动距离太小不生成
       lastX = e.clientX;
       lastY = e.clientY;
       spawn(e.clientX, e.clientY);

@@ -61,7 +61,7 @@ export default function Hero() {
   const { explode } = AvatarExplosion();
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center px-6 pt-20">
+    <section id="hero" className="min-h-screen flex items-center justify-center px-6 pt-20" data-parallax="0.05">
       <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-8 items-center">
         {/* 个人信息 */}
         <div className="glass card-hover float-2 p-8 flex flex-col items-center text-center md:items-start md:text-left">
@@ -70,7 +70,7 @@ export default function Hero() {
               尘
             </div>
           </div>
-          <h1 className="title-xl mb-3">你好，我是 尘堑</h1>
+          <h1 className="title-xl mb-3 gradient-text">你好，我是 尘堑</h1>
           <p className="text-body text-lg leading-relaxed">
             Java 后端 / 前端开发 / AI Agent 探索者
           </p>
@@ -84,8 +84,9 @@ export default function Hero() {
             ))}
           </div>
           {/* 向下滚动提示 */}
-          <div className="mt-8 flex flex-col items-center animate-bounce">
-            <span className="text-xs" style={{ color: 'var(--text-muted)' }}>↓ 向下探索</span>
+          <div className="mt-8 flex flex-col items-center gap-2">
+            <div className="scroll-mouse" />
+            <span className="text-[10px]" style={{ color: 'var(--text-muted)' }}>向下探索</span>
           </div>
         </div>
 
