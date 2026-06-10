@@ -136,102 +136,68 @@ export default function Hero() {
             <svg
               viewBox="0 0 120 120"
               className="w-28 h-28 md:w-32 md:h-32"
-              style={{ filter: 'drop-shadow(0 0 12px rgba(212,168,67,0.25))' }}
+              style={{ filter: 'drop-shadow(0 0 8px rgba(200,50,50,0.3))' }}
             >
               <defs>
-                {/* 金色渐变 */}
-                <linearGradient id="seal-gold" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#c9952a" />
-                  <stop offset="25%" stop-color="#e8c56d" />
-                  <stop offset="50%" stop-color="#f5e09a" />
-                  <stop offset="75%" stop-color="#d4a843" />
-                  <stop offset="100%" stop-color="#a07828" />
+                {/* 朱砂红渐变 */}
+                <linearGradient id="seal-red" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#c23616" />
+                  <stop offset="50%" stop-color="#e84118" />
+                  <stop offset="100%" stop-color="#b33015" />
                 </linearGradient>
-                {/* 深金渐变 — 立体感 */}
-                <linearGradient id="seal-dark" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#8b6914" />
-                  <stop offset="50%" stop-color="#b8922e" />
-                  <stop offset="100%" stop-color="#7a5c12" />
-                </linearGradient>
-                {/* 内发光 */}
-                <radialGradient id="seal-glow" cx="50%" cy="45%" r="45%">
-                  <stop offset="0%" stop-color="#f5e09a" stop-opacity="0.12" />
-                  <stop offset="100%" stop-color="#0a0a0a" stop-opacity="0" />
-                </radialGradient>
-                {/* 圆形印章裁剪 */}
+                {/* 印章纹理噪点 */}
+                <filter id="seal-texture">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise" />
+                  <feColorMatrix type="saturate" values="0" in="noise" result="gray" />
+                  <feComponentTransfer in="gray" result="mask">
+                    <feFuncA type="discrete" tableValues="0 0 0 0 0.15 0.3 0.5 0.7 0.85 1" />
+                  </feComponentTransfer>
+                  <feComposite in="SourceGraphic" in2="mask" operator="out" />
+                </filter>
+                {/* 裁剪圆形 */}
                 <clipPath id="seal-clip">
                   <circle cx="60" cy="60" r="54" />
                 </clipPath>
               </defs>
 
-              {/* 底色 */}
+              {/* 底色 — 深色底 */}
               <circle cx="60" cy="60" r="56" fill="#0c0c0c" />
 
-              {/* 外圈 — 回纹边框 */}
-              <circle cx="60" cy="60" r="55" fill="none" stroke="url(#seal-gold)" strokeWidth="2" opacity="0.8" />
-              <circle cx="60" cy="60" r="52" fill="none" stroke="url(#seal-gold)" strokeWidth="0.8" opacity="0.4" />
+              {/* 外圈 — 朱砂红 */}
+              <circle cx="60" cy="60" r="55" fill="none" stroke="url(#seal-red)" strokeWidth="3" />
+              <circle cx="60" cy="60" r="52" fill="none" stroke="url(#seal-red)" strokeWidth="1" opacity="0.6" />
+
               {/* 内圈 */}
-              <circle cx="60" cy="60" r="46" fill="none" stroke="url(#seal-gold)" strokeWidth="1.2" opacity="0.5" />
-              <circle cx="60" cy="60" r="43" fill="none" stroke="url(#seal-gold)" strokeWidth="0.5" opacity="0.25" />
+              <circle cx="60" cy="60" r="46" fill="none" stroke="url(#seal-red)" strokeWidth="1.5" opacity="0.7" />
 
-              {/* 四角装饰点 — 传统印钮 */}
-              <circle cx="60" cy="10" r="2" fill="url(#seal-gold)" opacity="0.6" />
-              <circle cx="60" cy="110" r="2" fill="url(#seal-gold)" opacity="0.6" />
-              <circle cx="10" cy="60" r="2" fill="url(#seal-gold)" opacity="0.6" />
-              <circle cx="110" cy="60" r="2" fill="url(#seal-gold)" opacity="0.6" />
+              {/* 十字格线 — 传统印章分格 */}
+              <line x1="60" y1="16" x2="60" y2="104" stroke="url(#seal-red)" strokeWidth="1" opacity="0.35" />
+              <line x1="16" y1="60" x2="104" y2="60" stroke="url(#seal-red)" strokeWidth="1" opacity="0.35" />
 
-              {/* 内部光晕 */}
-              <circle cx="60" cy="60" r="46" fill="url(#seal-glow)" />
+              {/* 四格篆书符号 — 抽象云纹 */}
+              <g clipPath="url(#seal-clip)" fill="none" stroke="url(#seal-red)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" filter="url(#seal-texture)">
+                {/* 左上 — 回纹 */}
+                <path d="M30 38 L30 28 L42 28 L42 38 L36 38" />
+                <path d="M33 35 L33 31 L39 31 L39 35" />
 
-              {/* 尘字 — 篆书风格 SVG 描边 */}
-              <g clipPath="url(#seal-clip)">
-                {/* 上部 "小" — 三笔撇捺竖 */}
-                {/* 竖钩 */}
-                <path
-                  d="M60 22 L60 52"
-                  stroke="url(#seal-gold)" strokeWidth="3.5" strokeLinecap="round" fill="none"
-                />
-                {/* 左撇 */}
-                <path
-                  d="M60 28 Q52 32 42 40"
-                  stroke="url(#seal-gold)" strokeWidth="3" strokeLinecap="round" fill="none"
-                />
-                {/* 右捺 */}
-                <path
-                  d="M60 28 Q68 32 78 40"
-                  stroke="url(#seal-gold)" strokeWidth="3" strokeLinecap="round" fill="none"
-                />
-                {/* 左点 */}
-                <path
-                  d="M48 38 Q44 42 42 47"
-                  stroke="url(#seal-gold)" strokeWidth="2.5" strokeLinecap="round" fill="none"
-                />
-                {/* 右点 */}
-                <path
-                  d="M72 38 Q76 42 78 47"
-                  stroke="url(#seal-gold)" strokeWidth="2.5" strokeLinecap="round" fill="none"
-                />
+                {/* 右上 — 云纹 */}
+                <path d="M72 30 Q78 24 84 30 Q90 36 84 38 L78 38 Q72 38 72 32 Z" />
+                <path d="M76 34 Q80 30 84 34" />
 
-                {/* 下部 "土" — 横竖横 */}
-                {/* 上横 */}
-                <path
-                  d="M38 60 L82 60"
-                  stroke="url(#seal-gold)" strokeWidth="3.5" strokeLinecap="round" fill="none"
-                />
-                {/* 竖 */}
-                <path
-                  d="M60 52 L60 92"
-                  stroke="url(#seal-gold)" strokeWidth="3.5" strokeLinecap="round" fill="none"
-                />
-                {/* 下横 — 篆书风格加长，微微上弧 */}
-                <path
-                  d="M32 85 Q60 80 88 85"
-                  stroke="url(#seal-gold)" strokeWidth="4" strokeLinecap="round" fill="none"
-                />
+                {/* 左下 — 水纹 */}
+                <path d="M26 76 Q32 70 38 76 Q44 82 50 76" />
+                <path d="M28 82 Q34 76 40 82 Q46 88 52 82" />
+
+                {/* 右下 — 山纹 */}
+                <path d="M68 90 L76 72 L84 90" />
+                <path d="M74 86 L80 74 L86 86" />
               </g>
 
-              {/* 顶部光泽 — 模拟金属高光 */}
-              <ellipse cx="60" cy="30" rx="30" ry="12" fill="url(#seal-glow)" opacity="0.3" />
+              {/* 四角装饰点 */}
+              <circle cx="60" cy="12" r="1.5" fill="url(#seal-red)" opacity="0.5" />
+              <circle cx="60" cy="108" r="1.5" fill="url(#seal-red)" opacity="0.5" />
+              <circle cx="12" cy="60" r="1.5" fill="url(#seal-red)" opacity="0.5" />
+              <circle cx="108" cy="60" r="1.5" fill="url(#seal-red)" opacity="0.5" />
             </svg>
           </div>
           <h1 className="title-xl mb-3 gradient-text">
