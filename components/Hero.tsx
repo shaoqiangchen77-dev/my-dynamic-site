@@ -136,68 +136,102 @@ export default function Hero() {
             <svg
               viewBox="0 0 120 120"
               className="w-28 h-28 md:w-32 md:h-32"
-              style={{ filter: 'drop-shadow(0 0 8px rgba(200,50,50,0.3))' }}
+              style={{ filter: 'drop-shadow(0 0 6px rgba(200,50,50,0.3))' }}
             >
               <defs>
-                {/* 朱砂红渐变 */}
                 <linearGradient id="seal-red" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#c23616" />
-                  <stop offset="50%" stop-color="#e84118" />
-                  <stop offset="100%" stop-color="#b33015" />
+                  <stop offset="0%" stop-color="#b71c1c" />
+                  <stop offset="50%" stop-color="#d32f2f" />
+                  <stop offset="100%" stop-color="#9a1a1a" />
                 </linearGradient>
-                {/* 印章纹理噪点 */}
-                <filter id="seal-texture">
-                  <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise" />
-                  <feColorMatrix type="saturate" values="0" in="noise" result="gray" />
-                  <feComponentTransfer in="gray" result="mask">
-                    <feFuncA type="discrete" tableValues="0 0 0 0 0.15 0.3 0.5 0.7 0.85 1" />
+                <filter id="seal-worn">
+                  <feTurbulence type="fractalNoise" baseFrequency="1.5" numOctaves="4" result="n" />
+                  <feColorMatrix type="saturate" values="0" in="n" result="g" />
+                  <feComponentTransfer in="g" result="m">
+                    <feFuncA type="discrete" tableValues="0 0 0 0.1 0.25 0.45 0.65 0.85 1 1" />
                   </feComponentTransfer>
-                  <feComposite in="SourceGraphic" in2="mask" operator="out" />
+                  <feComposite in="SourceGraphic" in2="m" operator="out" />
                 </filter>
-                {/* 裁剪圆形 */}
                 <clipPath id="seal-clip">
-                  <circle cx="60" cy="60" r="54" />
+                  <rect x="12" y="12" width="96" height="96" rx="1" />
                 </clipPath>
               </defs>
 
-              {/* 底色 — 深色底 */}
-              <circle cx="60" cy="60" r="56" fill="#0c0c0c" />
+              {/* 深色底 */}
+              <rect x="2" y="2" width="116" height="116" rx="4" fill="#0c0c0c" />
 
-              {/* 外圈 — 朱砂红 */}
-              <circle cx="60" cy="60" r="55" fill="none" stroke="url(#seal-red)" strokeWidth="3" />
-              <circle cx="60" cy="60" r="52" fill="none" stroke="url(#seal-red)" strokeWidth="1" opacity="0.6" />
+              {/* 外框 — 双层方框 */}
+              <rect x="6" y="6" width="108" height="108" rx="2" fill="none" stroke="url(#seal-red)" strokeWidth="3.5" />
+              <rect x="11" y="11" width="98" height="98" rx="1" fill="none" stroke="url(#seal-red)" strokeWidth="1.2" opacity="0.5" />
 
-              {/* 内圈 */}
-              <circle cx="60" cy="60" r="46" fill="none" stroke="url(#seal-red)" strokeWidth="1.5" opacity="0.7" />
+              {/* 受命于天 既寿永昌 — 篆书风格 */}
+              <g clipPath="url(#seal-clip)" fill="none" stroke="url(#seal-red)" strokeLinecap="round" strokeLinejoin="round" filter="url(#seal-worn)">
 
-              {/* 十字格线 — 传统印章分格 */}
-              <line x1="60" y1="16" x2="60" y2="104" stroke="url(#seal-red)" strokeWidth="1" opacity="0.35" />
-              <line x1="16" y1="60" x2="104" y2="60" stroke="url(#seal-red)" strokeWidth="1" opacity="0.35" />
+                {/* 受 — 左上 */}
+                <g strokeWidth="2.5">
+                  <path d="M20 18 L48 18" />
+                  <path d="M24 22 L44 22" />
+                  <path d="M34 18 L34 42" />
+                  <path d="M20 28 Q28 34 34 30 Q40 26 48 28" />
+                  <path d="M24 36 L44 36" />
+                  <path d="M22 42 L46 42" />
+                  <path d="M28 42 L28 52" />
+                  <path d="M40 42 L40 52" />
+                </g>
 
-              {/* 四格篆书符号 — 抽象云纹 */}
-              <g clipPath="url(#seal-clip)" fill="none" stroke="url(#seal-red)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" filter="url(#seal-texture)">
-                {/* 左上 — 回纹 */}
-                <path d="M30 38 L30 28 L42 28 L42 38 L36 38" />
-                <path d="M33 35 L33 31 L39 31 L39 35" />
+                {/* 命 — 右上 */}
+                <g strokeWidth="2.5">
+                  <path d="M64 16 L64 46" />
+                  <path d="M56 20 L72 20" />
+                  <path d="M56 20 L56 30 L72 30 L72 20" />
+                  <path d="M60 34 L68 34" />
+                  <path d="M56 40 L64 46 L72 40" />
+                  <path d="M56 50 L72 50" />
+                </g>
 
-                {/* 右上 — 云纹 */}
-                <path d="M72 30 Q78 24 84 30 Q90 36 84 38 L78 38 Q72 38 72 32 Z" />
-                <path d="M76 34 Q80 30 84 34" />
+                {/* 于 — 左中 */}
+                <g strokeWidth="2.5">
+                  <path d="M22 60 L46 60" />
+                  <path d="M34 56 L34 80" />
+                  <path d="M22 70 L46 70" />
+                  <path d="M24 76 L34 80 L44 76" />
+                </g>
 
-                {/* 左下 — 水纹 */}
-                <path d="M26 76 Q32 70 38 76 Q44 82 50 76" />
-                <path d="M28 82 Q34 76 40 82 Q46 88 52 82" />
+                {/* 天 — 右中 */}
+                <g strokeWidth="2.5">
+                  <path d="M56 58 L72 58" />
+                  <path d="M54 66 L74 66" />
+                  <path d="M64 58 L64 82" />
+                  <path d="M52 74 L64 82 L76 74" />
+                </g>
 
-                {/* 右下 — 山纹 */}
-                <path d="M68 90 L76 72 L84 90" />
-                <path d="M74 86 L80 74 L86 86" />
+                {/* 既 — 左下 */}
+                <g strokeWidth="2.5">
+                  <path d="M18 90 L48 90" />
+                  <path d="M22 94 L44 94" />
+                  <path d="M20 90 L20 104" />
+                  <path d="M34 90 L34 104" />
+                  <path d="M20 98 L34 98" />
+                  <path d="M40 90 L48 96" />
+                  <path d="M40 96 L48 102" />
+                </g>
+
+                {/* 寿 — 右下 */}
+                <g strokeWidth="2.5">
+                  <path d="M56 88 L72 88" />
+                  <path d="M58 92 L70 92" />
+                  <path d="M56 96 L72 96" />
+                  <path d="M64 88 L64 106" />
+                  <path d="M56 100 L72 100" />
+                  <path d="M58 104 L70 104" />
+                  <path d="M60 100 L60 106" />
+                  <path d="M68 100 L68 106" />
+                </g>
               </g>
 
-              {/* 四角装饰点 */}
-              <circle cx="60" cy="12" r="1.5" fill="url(#seal-red)" opacity="0.5" />
-              <circle cx="60" cy="108" r="1.5" fill="url(#seal-red)" opacity="0.5" />
-              <circle cx="12" cy="60" r="1.5" fill="url(#seal-red)" opacity="0.5" />
-              <circle cx="108" cy="60" r="1.5" fill="url(#seal-red)" opacity="0.5" />
+              {/* 中心分格线 */}
+              <line x1="60" y1="14" x2="60" y2="106" stroke="url(#seal-red)" strokeWidth="1" opacity="0.3" />
+              <line x1="14" y1="58" x2="106" y2="58" stroke="url(#seal-red)" strokeWidth="1" opacity="0.3" />
             </svg>
           </div>
           <h1 className="title-xl mb-3 gradient-text">
