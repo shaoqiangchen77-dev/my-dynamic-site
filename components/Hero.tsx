@@ -129,9 +129,38 @@ export default function Hero() {
       <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-8 items-center">
         {/* 个人信息 */}
         <div className="glass card-hover float-2 p-8 flex flex-col items-center text-center md:items-start md:text-left">
-          <div className="w-28 h-28 rounded-full glass-subtle flex items-center justify-center mb-6 overflow-hidden cursor-pointer" onClick={explode}>
-            <div className="w-24 h-24 rounded-full flex items-center justify-center text-4xl font-bold" style={{ background: '#0a0a0a', color: '#d4a843' }}>
-              尘
+          <div
+            className="w-32 h-32 rounded-full flex items-center justify-center mb-6 cursor-pointer relative"
+            onClick={explode}
+            style={{
+              background: 'conic-gradient(from 0deg, #b8860b, #d4a843, #ffd700, #d4a843, #b8860b, #d4a843, #ffd700, #d4a843, #b8860b)',
+              padding: '3px',
+            }}
+          >
+            <div
+              className="w-full h-full rounded-full flex items-center justify-center relative overflow-hidden"
+              style={{ background: '#0a0a0a' }}
+            >
+              {/* 金色光泽动画层 */}
+              <div
+                className="absolute inset-0 rounded-full"
+                style={{
+                  background: 'linear-gradient(135deg, transparent 30%, rgba(212,168,67,0.08) 45%, rgba(255,215,0,0.12) 50%, rgba(212,168,67,0.08) 55%, transparent 70%)',
+                  animation: 'gold-shine 3s ease-in-out infinite',
+                }}
+              />
+              <span
+                className="relative text-5xl font-bold"
+                style={{
+                  color: '#d4a843',
+                  textShadow: '0 0 20px rgba(212,168,67,0.4), 0 0 40px rgba(212,168,67,0.15), 0 2px 4px rgba(0,0,0,0.5)',
+                  fontFamily: "'Inter', serif",
+                  fontWeight: 800,
+                  letterSpacing: '0.05em',
+                }}
+              >
+                尘
+              </span>
             </div>
           </div>
           <h1 className="title-xl mb-3 gradient-text">

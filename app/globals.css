@@ -784,6 +784,12 @@ body {
   100% { transform: translateX(-50%) translateY(10px); opacity: 0; }
 }
 
+/* 鎏金光泽动画 */
+@keyframes gold-shine {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 /* ============================================
    键盘按键样式
    ============================================ */
